@@ -1,15 +1,18 @@
+import java.util.HashMap;
 public class EasyKata {
-    public boolean checkThreeAndTwo(char[] chars) {
-        String firstChar = "";
-        String secondChar = "";
-        for(int i = 0; i < chars.length; i++) {
-            if (firstChar == "" && !(secondChar.equals(chars[i]))) {
-                firstChar.equals(chars[i]);
-            }
-            if(firstChar.equals(chars[i])) {
 
+
+        public static HashMap <String, String> getStatus(boolean isBusy) {
+            HashMap<String, String> status;
+            status = new HashMap<>();
+
+            if (isBusy) {
+                status.put("status", "busy");
+            } else {
+                status.put("status", "available");
             }
+
+            return status;
         }
-        return false;
-    }
+
 }
