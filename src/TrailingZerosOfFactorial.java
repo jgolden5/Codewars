@@ -9,4 +9,7 @@ public class TrailingZerosOfFactorial {
             return 1;
         }
     }
+    public static int countDigits(int n) {
+        return n >= 0 ? String.valueOf(factorial(n)).length() : 0;
+    }
 }
