@@ -18,6 +18,7 @@ public class ParityOutlier {
                 }
             }
         }
+        return -1;
     }
 }
 

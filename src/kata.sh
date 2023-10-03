@@ -1,28 +1,16 @@
 #!/bin/bash
 
-isValid() {
-  isValid=True
+paddedNumbers() {
+  n="$1"
+  padded=""
+  lengthOfInput=${#n}
 
-  if [[ $1 = *" "* ]]; then
-    isValid=False
-  else
-    IFS='.' read -r -a adrArr <<< "$1"
-
-    dotCount=0
-
-    for ip in ${adrArr[@]}; do
-      dotCount=$((dotCount+1))
-      if [[ ${ip/0/} ]] && [[ ${ip::1} -eq 0 ]] || [[ $ip -lt 0 ]] || [[ $ip -gt 255 ]]; then
-        isValid=False
-        break
-      fi
+  if [[ $lengthOfInput -lt 5 ]]; then
+    while [[ $((${#padded} + $lengthOfInput)) -lt 5 ]]; do
+      padded+="0"
     done
-
-    if [[ $dotCount -ne 4 ]]; then
-      isValid=False
-    fi
   fi
+  padded+="$n"
 
-
-  echo $isValid
+  echo "Value is ${padded}"
 }
