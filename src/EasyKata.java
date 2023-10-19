@@ -1,18 +1,9 @@
-import java.util.HashMap;
+import java.util.Random;
 public class EasyKata {
 
 
-        public static HashMap <String, String> getStatus(boolean isBusy) {
-            HashMap<String, String> status;
-            status = new HashMap<>();
-
-            if (isBusy) {
-                status.put("status", "busy");
-            } else {
-                status.put("status", "available");
-            }
-
-            return status;
-        }
+    public static int howOld(final String herOld) {
+        return Integer.parseInt(herOld.substring(0, 1));
+    }
 
 }

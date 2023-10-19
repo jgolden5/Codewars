@@ -22,13 +22,25 @@ public class MaxSubarraySum {
             return 0;
         } else {
             arr = excludeNegativeBookends(arr);
+            if(containsOnlyPositives(arr)) {
+                return sumArray(arr);
+            }
         }
         return -1;
     }
 
     public static boolean containsOnlyNegatives(int[] arr) {
         for(int i = 0; i < arr.length; i++) {
-            if(arr[i] >= 0) {
+            if(arr[i] > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean containsOnlyPositives(int[] arr) {
+        for(int i = 0; i < arr.length; i++) {
+            if(arr[i] < 0) {
                 return false;
             }
         }
@@ -59,6 +71,14 @@ public class MaxSubarraySum {
             finalArr[i] = withoutBookends.get(i);
         }
         return finalArr;
+    }
+
+    public static int sumArray(int[] arr) {
+        int sum = 0;
+        for(int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        return sum;
     }
 
 }
