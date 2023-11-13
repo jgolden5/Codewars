@@ -31,12 +31,27 @@ intToBin() {
   fi
 }
 
+nextHighestSameOnes() {
+  b=$1
+
+  length=${#b}
+
+  reversed=()
+
+  for((i = length - 1; i >= 0; i--)); do
+    echo $i
+    reversed+=("${b[$i]}")
+    echo $reversed
+  done
+
+  echo "Original array: ${b[@]}"
+  echo "Reversed array: ${reversed[@]}"
+}
+
 n=$1
 
 b="$(intToBin $n)"
 
+echo "binary = $b"
 
-
-
-echo $b
-
+nextHighestSameOnes $b
