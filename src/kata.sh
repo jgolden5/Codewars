@@ -31,7 +31,7 @@ intToBin() {
   fi
 }
 
-nextHighestSameOnes() {
+nextHighestBinaryWithSameNumberOfOnes() {
   b=$1
 
   length=${#b}
@@ -48,10 +48,12 @@ nextHighestSameOnes() {
   echo "Reversed array: ${reversed[@]}"
 }
 
+#what technically gets run
+
 n=$1
 
 b="$(intToBin $n)"
 
 echo "binary = $b"
 
-nextHighestSameOnes $b
+nextHighestBinaryWithSameNumberOfOnes $b
