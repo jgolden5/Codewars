@@ -1,59 +1,22 @@
 #!/bin/bash
-
-#int to binary
-intToBin() {
-  remaining=$1
-  if [[ $remaining -le 0 ]]; then
-    echo 0
-  else
-    exp=0
-    while [[ $((2**$exp)) -le $1 ]]; do
-      exp=$((exp+1))
-    done
-
-    exp=$((exp-1))
-
-    bin=""
-
-    while [[ $exp -ge 0 ]]; do
-      currentOneValue=$((2**$exp))
-      if [[ $remaining -ge $currentOneValue ]]; then
-        remaining=$(($remaining - $currentOneValue))
-        bin+=1
+accum () {
+  str=$1
+  result=""
+  for (( i = 0; i < ${#str}; i++ )); do
+    j=0
+    while [[ $j -le $i ]]; do
+      charToAdd=${str:$i:1}
+      if [[ $j -eq 0 ]]; then
+        charToAdd=$(echo "${charToAdd^}")
       else
-        bin+=0
+        charToAdd=$(echo "${charToAdd,}")
       fi
-      exp=$((exp - 1))
+      result+=$charToAdd
+      j=$((j + 1))
     done
-
-    echo $bin
-
-  fi
-}
-
-nextHighestBinaryWithSameNumberOfOnes() {
-  b=$1
-
-  length=${#b}
-
-  reversed=()
-
-  for((i = length - 1; i >= 0; i--)); do
-    echo $i
-    reversed+=("${b[$i]}")
-    echo $reversed
+    if [[ $j -ne $((${#str})) ]]; then
+      result+="-"
+    fi
   done
-
-  echo "Original array: ${b[@]}"
-  echo "Reversed array: ${reversed[@]}"
+  echo $result
 }
-
-#what technically gets run
-
-n=$1
-
-b="$(intToBin $n)"
-
-echo "binary = $b"
-
-nextHighestBinaryWithSameNumberOfOnes $b
