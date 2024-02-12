@@ -1,66 +1,37 @@
-import java.util.ArrayList;
+import java.util.Stack;
 
 public class MathEvaluator {
     public double calculate(String expression) {
-        String[] arrExpression = expression.replaceAll(" ", "").split("");
-        ArrayList<Double> operandList = new ArrayList<>();
-        ArrayList<String> operatorList = new ArrayList<>();
-//        System.out.println(Arrays.toString(arrExpression));
-        //1: Set up Lists
-        boolean lastCharWasMinus = false;
-        boolean nextNumberShouldBeNegative = false;
-        for(int i = 0; i < arrExpression.length; i++) {
-            boolean nextCharIsNumber = i == arrExpression.length - 1 ? false : "01234567890".contains(arrExpression[i + 1]);
-            if("01234567890".contains(arrExpression[i])) {
-                if(nextNumberShouldBeNegative) {
-                    if(lastCharWasMinus) {
-                        operatorList.add("+");
-                        nextNumberShouldBeNegative = false;
-                        lastCharWasMinus = false;
-                    }
-                    operandList.add(-1 * Double.valueOf(arrExpression[i]));
-                    nextNumberShouldBeNegative = false;
-                    lastCharWasMinus = false;
-                } else {
-                    operandList.add(Double.valueOf(arrExpression[i]));
-                }
-            } else if("+".equals(arrExpression[i])) {
-                operatorList.add(arrExpression[i]);
-            } else if("-".equals(arrExpression[i])) {
-                if(lastCharWasMinus) {
-                    operatorList.add("+");
-                    nextNumberShouldBeNegative = false;
-                    lastCharWasMinus = false;
-                } else {
-                    if(nextCharIsNumber) {
-                        operatorList.add("+");
-                        nextNumberShouldBeNegative = true;
-                        lastCharWasMinus = false;
-                    } else {
-                        nextNumberShouldBeNegative = true;
-                        lastCharWasMinus = true;
-                    }
-                }
-            }
-        }
-        double total = operandList.get(0);
-
-//        System.out.println("Operand List equals = " + operandList);
-//        System.out.println("Operator List equals = " + operatorList);
-
-        //2: Calculate first 2 operands based on first operator
-        for(int i = 1; i < operandList.size(); i++) {
-            switch (operatorList.get(i - 1)) {
-                case "+":
-                    total += operandList.get(i);
-                    break;
-                default:
-                    System.out.println("Something isn't working right");
-            }
-        }
-        return total;
-//        return arrExpression.length > 3 ? calculate(arrExpression.toString()) : total;
+        String expressionInRPN = infixToRPN(expression);
+        double result = evaluateRPN(expressionInRPN);
+        return result;
     }
+
+    public String infixToRPN(String infixExpression) {
+        String rpnExpression = "";
+        String[] infixArr = infixExpression.replaceAll("\\s+","").split("");
+        String operators = "";
+        String operands = "";
+        for(String element : infixArr) {
+            
+        }
+        return rpnExpression;
+    }
+
+    private double evaluateRPN(String expr) {
+        var stack = new Stack<Double>();
+        for(String element : expr.split(" ")) {
+            switch (element) {
+                case "+" -> stack.push(stack.pop() + stack.pop());
+                case "-" -> stack.push(-stack.pop() + stack.pop());
+                case "*" -> stack.push(stack.pop() * stack.pop());
+                case "/" -> stack.push(1 / stack.pop() * stack.pop());
+                default -> stack.push(element.isEmpty() ? 0 : Double.parseDouble(element));
+            }
+        }
+        return stack.pop();
+    }
+
 }
 
 /*tasks for calculator:
