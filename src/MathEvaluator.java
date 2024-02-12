@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class MathEvaluator {
@@ -10,12 +11,22 @@ public class MathEvaluator {
     public String infixToRPN(String infixExpression) {
         String rpnExpression = "";
         String[] infixArr = infixExpression.replaceAll("\\s+","").split("");
-        String operators = "";
+        ArrayList<Double> operators = new ArrayList<>();
         String operands = "";
         for(String element : infixArr) {
-            
+            if("+-*/".contains(element)) {
+                operands += element;
+            } else {
+                operators.add(Double.valueOf(element));
+            }
         }
-        return rpnExpression;
+        for(Double operator : operators) {
+            rpnExpression += Double.toString(operator) + " ";
+        }
+        for(int i = 0; i < operands.length(); i++) {
+            rpnExpression += operands.charAt(i) + " ";
+        }
+        return rpnExpression.stripTrailing();
     }
 
     private double evaluateRPN(String expr) {
