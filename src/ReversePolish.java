@@ -8,12 +8,12 @@ public class ReversePolish {
         if(expr.length() == 0) {
             return 0;
         } else {
-            for (int i = 0; i < expressionAsStringArray.length; i++) {
+            for(int i = 0; i < expressionAsStringArray.length; i++) {
                 String currentElement = expressionAsStringArray[i];
-                if (operators.contains(currentElement)) {
+                if(operators.contains(currentElement)) {
                     double op1 = Double.parseDouble(stack.pop());
                     double op2 = Double.parseDouble(stack.pop());
-                    switch (currentElement) {
+                    switch(currentElement) {
                         case "+" -> stack.push(Double.toString(op2 + op1));
                         case "-" -> stack.push(Double.toString(op2 - op1));
                         case "*" -> stack.push(Double.toString(op2 * op1));

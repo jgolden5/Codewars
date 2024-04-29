@@ -1,9 +1,12 @@
-import java.util.Random;
 public class EasyKata {
 
-
-    public static int howOld(final String herOld) {
-        return Integer.parseInt(herOld.substring(0, 1));
+    public static long findNb(long m) {
+        double s = Math.sqrt(m);
+        if(s == Math.floor(s)) {
+            return (long)s;
+        } else {
+            return -1;
+        }
     }
 
 }

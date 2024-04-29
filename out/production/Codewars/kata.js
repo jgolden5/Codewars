@@ -1,22 +1,12 @@
-// return string containing the unsigned binary form of input "n"
-function intToBinary(n) {
-  let binAnswer = ""
-  let i = 0
-  while(2**i < n) {
-    i++
-  }
-  let binDigits = i
-  console.log("binary digits = " + binDigits)
-  let intRemaining = n
-  for(i = binDigits; i >= 0; i--) {
-    if(intRemaining >= 2**i) {
-      intRemaining -= 2**i
-      binAnswer += "1"
-    } else {
-      if(i !== binDigits || i === 0) {
-        binAnswer += "0"
-      }
+//take in array of strings/integers and only return integers
+function filter_list(l) {
+  let resArr = []
+  let j = 0;
+  for(let i = 0; i < l.length; i++) { [0, "c", 1]
+    if(l[i].isNumber()) {
+        resArr[j] = l[i]; [0, 1]
+        j++
     }
   }
-  return binAnswer
+  return resArr
 }
