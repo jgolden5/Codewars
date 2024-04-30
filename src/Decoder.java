@@ -11,9 +11,8 @@ public class Decoder {
     public String decode(File messageFile) throws IOException {
         ArrayList<String> fileLines = (ArrayList<String>) Files.readAllLines(messageFile.toPath(), Charset.defaultCharset());
         ArrayList<String> pyramidLineEndIndices = generateEndIndices(fileLines.size());
-        String[] unsortedDecodedLines = calculateDecodedLines(pyramidLineEndIndices);
-        String[] sortedDecodedLines = sortDecodedLines(unsortedDecodedLines);
-        return getDecodedMessage(sortedDecodedLines);
+        String[] decodedLines = calculateDecodedLines(fileLines, pyramidLineEndIndices);
+        return getDecodedMessage(decodedLines);
     }
 
     public ArrayList<String> generateEndIndices(int fileLength) {
@@ -28,12 +27,26 @@ public class Decoder {
         return pyramidLineEndIndices;
     }
 
-    private String[] calculateDecodedLines(ArrayList<String> pyramidLineEndIndices) {
-        return null;
-    }
-
-    private String[] sortDecodedLines(String[] unsortedDecodedLines) {
-        return null;
+    private String[] calculateDecodedLines(ArrayList<String> fileLines, ArrayList<String> pyramidLineEndIndices) {
+        String[] decodedLines = new String[pyramidLineEndIndices.size()];
+        int linesFilledIn = 0;
+        for (String fileLine : fileLines) {
+            Pattern pattern = Pattern.compile("(\\d+) (\\D+)");
+            Matcher matcher = pattern.matcher(fileLine);
+            if(matcher.find()) {
+                String lineNumber = matcher.group(1);
+                int foundIndex = pyramidLineEndIndices.indexOf(lineNumber);
+                if (foundIndex > -1) {
+                    String lineContent = matcher.group(2);
+                    decodedLines[foundIndex] = lineContent;
+                    linesFilledIn++;
+                    if(linesFilledIn == pyramidLineEndIndices.size()) {
+                        break;
+                    }
+                }
+            }
+        }
+        return decodedLines;
     }
 
     private String getDecodedMessage(String[] decodedLinesInOrder) {
