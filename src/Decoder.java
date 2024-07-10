@@ -10,12 +10,12 @@ public class Decoder {
 
     public String decode(File messageFile) throws IOException {
         ArrayList<String> fileLines = (ArrayList<String>) Files.readAllLines(messageFile.toPath(), Charset.defaultCharset());
-        ArrayList<String> pyramidLineEndIndices = generateEndIndices(fileLines.size());
+        ArrayList<String> pyramidLineEndIndices = generatePyramidEndIndices(fileLines.size());
         String[] decodedLines = calculateDecodedLines(fileLines, pyramidLineEndIndices);
         return getDecodedMessage(decodedLines);
     }
 
-    public ArrayList<String> generateEndIndices(int fileLength) {
+    private ArrayList<String> generatePyramidEndIndices(int fileLength) {
         ArrayList<String> pyramidLineEndIndices = new ArrayList<>();
         int n = 1;
         int interval = 2;
@@ -49,8 +49,12 @@ public class Decoder {
         return decodedLines;
     }
 
-    private String getDecodedMessage(String[] decodedLinesInOrder) {
-        return null;
+    private String getDecodedMessage(String[] decodedLines) {
+        String message = "";
+        for(String line : decodedLines) {
+            message += line + " ";
+        }
+        return message.stripTrailing();
     }
 
 }

@@ -3,10 +3,10 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        File f1 = new File("/Users/jgolden1/example.txt");
+        File f = new File("/Users/jgolden1/Downloads/coding_qual_input.txt");
         Decoder decoder = new Decoder();
         try {
-            decoder.decode(f1);
+            System.out.println(decoder.decode(f));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
