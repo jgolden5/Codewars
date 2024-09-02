@@ -1,22 +1,21 @@
 #!/bin/bash
-accum () {
-  str=$1
-  result=""
-  for (( i = 0; i < ${#str}; i++ )); do
-    j=0
-    while [[ $j -le $i ]]; do
-      charToAdd=${str:$i:1}
-      if [[ $j -eq 0 ]]; then
-        charToAdd=$(echo "${charToAdd^}")
-      else
-        charToAdd=$(echo "${charToAdd,}")
-      fi
-      result+=$charToAdd
-      j=$((j + 1))
-    done
-    if [[ $j -ne $((${#str})) ]]; then
-      result+="-"
-    fi
-  done
-  echo $result
+isLeapYear() {
+
+	year="$1"
+
+	isDivisibleBy4=("[[ $(($year % 4)) == 0 ]] && 1 || 0")
+	echo "is divisible by 4 = $isDivisibleBy4"
+
+	isDivisibleBy400="[[ $(($year % 400)) == 0 ]]"
+	echo "is divisible by 400 = $isDivisibleBy400"
+
+	isNotDivisibleBy100="[[ $(($year % 100)) != 0 ]]"
+	echo "is not divisible by 100 = $isNotDivisibleBy100"
+
+	if [[ $isDivisibleBy4 ]] && [[ $isDivisibleBy400 ]] && [[ $isNotDivisibleBy100 ]]; then
+		echo 1
+	else
+		echo 0
+	fi
+
 }
