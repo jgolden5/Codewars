@@ -1,28 +1,35 @@
 public class Snail {
   public static int[] snail(int[][] slug) {
-    final int n = slug.length;
-    int[] snail = new int[n * n];
-    int max = n - 1;
-    int min = 0;
-    int i = 0;
-    while(i < n * n) {
-      snail = slug_to_snail(slug, snail, i, new int[][]{new int[]{min}, new int[]{min, max}});
-      i += max - min + 1;
-      if(i + max - (min + 1) + 1 == n * n - 1) {
-        snail = slug_to_snail(slug, snail, i, new int[][]{new int[]{max}, new int[]{min + 1, max}});
-        break;
-      } else {
-        snail = slug_to_snail(slug, snail, i, new int[][]{new int[]{min + 1, max}, new int[]{max}});
-        i += max - (min + 1) + 1;
-      }
-      snail = slug_to_snail(slug, snail, i, new int[][]{new int[]{max--}, new int[]{max, min}});
-      i += max - min + 1;
-      if(i + (max - min) == n * n - 1) {
-        snail = slug_to_snail(slug, snail, i, new int[][]{new int[]{min + 1}, new int[]{min, max}});
+    final int n = slug[0].length;
+    int[] snail;
+    if(n == 1) {
+      snail = new int[]{slug[0][0]};
+    } else if(n == 0) {
+      snail = new int[]{};
+    } else {
+      snail = new int[n * n];
+      int max = n - 1;
+      int min = 0;
+      int i = 0;
+      while (i < n * n) {
+        snail = slug_to_snail(slug, snail, i, new int[][]{new int[]{min}, new int[]{min, max}});
         i += max - min + 1;
-      } else {
-        snail = slug_to_snail(slug, snail, i, new int[][]{new int[]{max, min + 1}, new int[]{min++}});
+        if (i + max - (min + 1) + 1 == n * n - 1) {
+          snail = slug_to_snail(slug, snail, i, new int[][]{new int[]{max}, new int[]{min + 1, max}});
+          break;
+        } else {
+          snail = slug_to_snail(slug, snail, i, new int[][]{new int[]{min + 1, max}, new int[]{max}});
+          i += max - (min + 1) + 1;
+        }
+        snail = slug_to_snail(slug, snail, i, new int[][]{new int[]{max--}, new int[]{max, min}});
         i += max - min + 1;
+        if (i + (max - min) == n * n - 1) {
+          snail = slug_to_snail(slug, snail, i, new int[][]{new int[]{min + 1}, new int[]{min, max}});
+          i += max - min + 1;
+        } else {
+          snail = slug_to_snail(slug, snail, i, new int[][]{new int[]{max, min + 1}, new int[]{min++}});
+          i += max - min + 1;
+        }
       }
     }
     return snail;
