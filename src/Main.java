@@ -2,6 +2,7 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-      System.out.println(ReverseWords.reverseWords("Hello"));
+      MathEvaluator math = new MathEvaluator();
+      System.out.println(math.infixToRPN("1 + 2 * 12 - 16"));
     }
 }
