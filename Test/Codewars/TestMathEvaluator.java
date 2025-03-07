@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class TestMathEvaluator {
 
   public final MathEvaluator math = new MathEvaluator();
+
   @Test
   public void infixStringToStack() {
     //A: Test short, one-digit stacks
@@ -213,12 +214,14 @@ public class TestMathEvaluator {
 
     //I: Test minus signs
     Stack<String> minusSigns1 = new Stack<>();
-    minusSigns1.push("-9");
+    minusSigns1.push("-");
+    minusSigns1.push("9");
     assertEquals(minusSigns1, math.infixStringToStack("-9"));
     Stack<String> minusSigns2 = new Stack<>();
     minusSigns2.push("9");
     minusSigns2.push("+");
-    minusSigns2.push("-2");
+    minusSigns2.push("-");
+    minusSigns2.push("2");
     assertEquals(minusSigns2, math.infixStringToStack("9 + -2"));
     Stack<String> minusSigns3 = new Stack<>();
     minusSigns3.push("1");
@@ -229,23 +232,62 @@ public class TestMathEvaluator {
     assertEquals(minusSigns3, math.infixStringToStack("1- 1"));
     assertEquals(minusSigns3, math.infixStringToStack("1 - 1"));
     minusSigns3.pop();
-    minusSigns3.push("-1");
+    minusSigns3.push("-");
+    minusSigns3.push("1");
     assertEquals(minusSigns3, math.infixStringToStack("1 - -1"));
     assertEquals(minusSigns3, math.infixStringToStack("1--1"));
     Stack<String> minusSigns4 = new Stack<>();
     minusSigns4.push("6");
     minusSigns4.push("+");
-    minusSigns4.push("-4");
+    minusSigns4.push("-");
+    minusSigns4.push("(");
+    minusSigns4.push("4");
+    minusSigns4.push(")");
     assertEquals(minusSigns4, math.infixStringToStack("6 + -(4)"));
     Stack<String> minusSigns5 = new Stack<>();
     minusSigns5.push("6");
     minusSigns5.push("+");
+    minusSigns5.push("-");
+    minusSigns5.push("(");
+    minusSigns5.push("-");
     minusSigns5.push("4");
+    minusSigns5.push(")");
     assertEquals(minusSigns5, math.infixStringToStack("6 + -( -4)"));
+    Stack<String> minusSigns6 = new Stack<>();
+    minusSigns6.push("12");
+    minusSigns6.push("*");
+    minusSigns6.push("123");
+    minusSigns6.push("/");
+    minusSigns6.push("-");
+    minusSigns6.push("(");
+    minusSigns6.push("-");
+    minusSigns6.push("5");
+    minusSigns6.push("+");
+    minusSigns6.push("2");
+    minusSigns6.push(")");
+    assertEquals(minusSigns6, math.infixStringToStack("12* 123/-(-5 + 2)"));
+    Stack<String> minusSigns7 = new Stack<>();
+    minusSigns7.push("-");
+    minusSigns7.push("(");
+    minusSigns7.push("1");
+    minusSigns7.push("-");
+    minusSigns7.push("2");
+    minusSigns7.push(")");
+    minusSigns7.push("+");
+    minusSigns7.push("-");
+    minusSigns7.push("(");
+    minusSigns7.push("-");
+    minusSigns7.push("(");
+    minusSigns7.push("-");
+    minusSigns7.push("(");
+    minusSigns7.push("-");
+    minusSigns7.push("4");
+    minusSigns7.push(")");
+    minusSigns7.push(")");
+    minusSigns7.push(")");
+    assertEquals(minusSigns7, math.infixStringToStack("-(1 - 2) + -(-(-(-4)))"));
 
     //J: Test parentheses
 
-
   }
-
 }
