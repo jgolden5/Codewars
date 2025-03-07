@@ -344,7 +344,6 @@ public class TestMathEvaluator {
   @Test
   public void infixArrayListToPostfixStack() {
     //A: test simple infix to postfix
-    /*
     ArrayList<String> simpleInfix1 = new ArrayList<>();
     simpleInfix1.add("1");
     simpleInfix1.add("+");
@@ -354,7 +353,7 @@ public class TestMathEvaluator {
     simplePostfix1.add("2");
     simplePostfix1.add("+");
     assertEquals(simplePostfix1, math.infixArrayListToPostfixStack(simpleInfix1));
-     */
+
   }
 
 }

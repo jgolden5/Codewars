@@ -1,7 +1,9 @@
 package Codewars;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class MathEvaluator {
 
@@ -16,12 +18,30 @@ public class MathEvaluator {
    * @param infixArrayList
    * @return
    */
-  Stack<String> infixArrayListToPostfixStack(ArrayList infixArrayList) {
+  Stack<String> infixArrayListToPostfixStack(ArrayList<String> infixArrayList) {
     Stack<String> postfixStack = new Stack<>();
+    ArrayList<String> orderedOps = getOrderedOps(infixArrayList);
     for(int i = 0; i < infixArrayList.size(); i++) {
-
+      String nextChar = infixArrayList.get(i);
     }
     return postfixStack;
+  }
+
+  private ArrayList<String> getOrderedOps(ArrayList<String> infixArrayList) {
+    ArrayList<String> unorderedOps = getUnorderedOps(infixArrayList);
+    ArrayList<String> orderedOps = unorderedOps;
+    return orderedOps;
+  }
+
+  public ArrayList<String> getUnorderedOps(ArrayList<String> infixArrayList) {
+    ArrayList<String> unorderedOps = new ArrayList<>();
+    for(int i = 0; i < infixArrayList.size(); i++) {
+      String firstCharOfNextAsString = String.valueOf(infixArrayList.get(i).charAt(0));
+      if(!"0123456789.".contains(firstCharOfNextAsString)) {
+        unorderedOps.add(firstCharOfNextAsString);
+      }
+    }
+    return unorderedOps;
   }
 
   /**
@@ -60,11 +80,3 @@ public class MathEvaluator {
   }
 
 }
-
-/*tasks for calculator:
-1. Addition & Subtraction (no negatives)
-2. Addition & Subtraction (with negatives/double negatives)
-3. Multiplication & Division (with order of operations)
-4. Exponents (OOP)
-5. Parentheses
-*/
