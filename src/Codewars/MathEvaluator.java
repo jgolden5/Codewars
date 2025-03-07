@@ -1,9 +1,7 @@
 package Codewars;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
-import java.util.stream.Collectors;
 
 public class MathEvaluator {
 
@@ -20,16 +18,36 @@ public class MathEvaluator {
    */
   Stack<String> infixArrayListToPostfixStack(ArrayList<String> infixArrayList) {
     Stack<String> postfixStack = new Stack<>();
-    ArrayList<String> orderedOps = getOrderedOps(infixArrayList);
+    ArrayList<String> unorderedOps = getUnorderedOps(infixArrayList);
+    ArrayList<ArrayList<String>> orderedOps = getOrderedOps(unorderedOps);
     for(int i = 0; i < infixArrayList.size(); i++) {
       String nextChar = infixArrayList.get(i);
     }
     return postfixStack;
   }
 
-  private ArrayList<String> getOrderedOps(ArrayList<String> infixArrayList) {
-    ArrayList<String> unorderedOps = getUnorderedOps(infixArrayList);
-    ArrayList<String> orderedOps = unorderedOps;
+  ArrayList<ArrayList<String>> getOrderedOps(ArrayList<String> unorderedOps) {
+    ArrayList<ArrayList<String>> orderedOps = new ArrayList<>();
+    final String[] checks = new String[]{"()", "*/", "+-"};
+    boolean needToCloseParentheses = false;
+    for(String currentCheck : checks) {
+      ArrayList<String> nextOpPriority = new ArrayList<>();
+      for (String currentOp : unorderedOps) {
+        if (needToCloseParentheses) {
+          if(currentOp.equals(")")) {
+            needToCloseParentheses = false;
+          } else if(currentCheck.equals("()")) {
+            nextOpPriority.add(currentOp);
+          }
+        } else if(currentCheck.contains(currentOp) && !currentCheck.equals("()")) {
+          nextOpPriority.add(currentOp);
+        }
+        if(currentOp.equals("(")) {
+          needToCloseParentheses = true;
+        }
+      }
+      orderedOps.add(nextOpPriority);
+    }
     return orderedOps;
   }
 
