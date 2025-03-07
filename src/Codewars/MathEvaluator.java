@@ -23,6 +23,7 @@ public class MathEvaluator {
     Stack<String> infixStack = new Stack<>();
     final String possibleNums = "0123456789.";
     boolean nextNumberShouldIncludePreviousMinus = false;
+    boolean shouldRemoveNextParenthesis = false;
     for(int i = 0; i < infixString.length(); i++) {
       String nextChar = String.valueOf(infixString.charAt(i));
       boolean nextCharIsNumber = possibleNums.contains(nextChar);
@@ -30,14 +31,35 @@ public class MathEvaluator {
       boolean nextCharIsMinus = nextChar.equals("-");
       if(nextCharIsNumber && (previousCharWasNumber || nextNumberShouldIncludePreviousMinus)) {
         String poppedNum = infixStack.pop();
+        if(poppedNum.equals("(")) {
+          shouldRemoveNextParenthesis = true;
+          poppedNum = infixStack.pop();
+        }
         String poppedNumWithNextChar = poppedNum + nextChar;
         infixStack.push(poppedNumWithNextChar);
         nextNumberShouldIncludePreviousMinus = false;
       } else if(!nextChar.equals(" ")) {
-        infixStack.push(nextChar);
-        boolean onlyElementInStackIsMinus = infixStack.size() == 1 && infixStack.peek().equals("-");
-        if(!previousCharWasNumber && nextCharIsMinus || onlyElementInStackIsMinus) {
-          nextNumberShouldIncludePreviousMinus = true;
+        if(shouldRemoveNextParenthesis && nextChar.equals(")")) {
+          shouldRemoveNextParenthesis = false;
+        } else {
+          infixStack.push(nextChar);
+          boolean onlyElementInStackIsMinus = infixStack.size() == 1 && infixStack.peek().equals("-");
+          if (!previousCharWasNumber && nextCharIsMinus || onlyElementInStackIsMinus) {
+            if(nextNumberShouldIncludePreviousMinus) {
+              nextNumberShouldIncludePreviousMinus = false;
+              int minusesRemoved = 0;
+              while(minusesRemoved < 2) {
+                String elementRemoved = infixStack.pop();
+                if(elementRemoved.equals("-")) {
+                  minusesRemoved++;
+                } else if(elementRemoved.equals("(")) {
+                  shouldRemoveNextParenthesis = true;
+                }
+              }
+            } else {
+              nextNumberShouldIncludePreviousMinus = true;
+            }
+          }
         }
       }
     }

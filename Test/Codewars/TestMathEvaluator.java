@@ -232,6 +232,16 @@ public class TestMathEvaluator {
     minusSigns3.push("-1");
     assertEquals(minusSigns3, math.infixStringToStack("1 - -1"));
     assertEquals(minusSigns3, math.infixStringToStack("1--1"));
+    Stack<String> minusSigns4 = new Stack<>();
+    minusSigns4.push("6");
+    minusSigns4.push("+");
+    minusSigns4.push("-4");
+    assertEquals(minusSigns4, math.infixStringToStack("6 + -(4)"));
+    Stack<String> minusSigns5 = new Stack<>();
+    minusSigns5.push("6");
+    minusSigns5.push("+");
+    minusSigns5.push("4");
+    assertEquals(minusSigns5, math.infixStringToStack("6 + -( -4)"));
 
     //J: Test parentheses
 
