@@ -287,7 +287,59 @@ public class TestMathEvaluator {
     minusSigns7.push(")");
     assertEquals(minusSigns7, math.infixStringToStack("-(1 - 2) + -(-(-(-4)))"));
 
-    //J: Test parentheses
-
+    //J: Advanced tests
+    Stack<String> advanced1 = new Stack<>();
+    advanced1.push("123.45");
+    advanced1.push("*");
+    advanced1.push("(");
+    advanced1.push("678.90");
+    advanced1.push("/");
+    advanced1.push("(");
+    advanced1.push("-");
+    advanced1.push("2.5");
+    advanced1.push("+");
+    advanced1.push("11.5");
+    advanced1.push(")");
+    advanced1.push("-");
+    advanced1.push("(");
+    advanced1.push("80");
+    advanced1.push("-");
+    advanced1.push("19");
+    advanced1.push(")");
+    advanced1.push("*");
+    advanced1.push("33.25");
+    advanced1.push(")");
+    advanced1.push("/");
+    advanced1.push("20");
+    advanced1.push("+");
+    advanced1.push("11");
+    assertEquals(advanced1, math.infixStringToStack("123.45*(678.90 / (-2.5+ 11.5)-(80 -19) *33.25) / 20 + 11"));
+    Stack<String> advanced2 = new Stack<>();
+    advanced2.push("(");
+    advanced2.push("-");
+    advanced2.push("2.5");
+    advanced2.push("+");
+    advanced2.push("11.5");
+    advanced2.push(")");
+    advanced2.push("-");
+    advanced2.push("(");
+    advanced2.push("(");
+    advanced2.push("(");
+    advanced2.push("80");
+    advanced2.push("-");
+    advanced2.push("(");
+    advanced2.push("19");
+    advanced2.push(")");
+    advanced2.push(")");
+    advanced2.push(")");
+    advanced2.push("*");
+    advanced2.push("33.25");
+    advanced2.push(")");
+    advanced2.push(")");
+    advanced2.push("/");
+    advanced2.push("4");
+    advanced2.push("*");
+    advanced2.push("0");
+    assertEquals(advanced2, math.infixStringToStack("(-2.5+ 11.5)-(((80 -(19))) *33.25))       /4*     0"));
   }
 }
