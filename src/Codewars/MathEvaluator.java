@@ -6,17 +6,22 @@ import java.util.Stack;
 public class MathEvaluator {
 
   public double calcFromInfix(String infix) {
-    String postfix = infixToPostfix(infix);
-    return calcFromPostfix(postfix);
+    ArrayList<String> infixArrayList = infixStringToArrayList(infix);
+    Stack<String> postfixStack = infixToPostfixStack(infixArrayList);
+    return calcFromPostfix(postfixStack);
   }
 
-  String infixToPostfix(String infix) {
-    Stack<String> infixStack = infixStringToStack(infix);
-    ArrayList<String> parenthesesSegment = new ArrayList<>();
-    for(String atom : infixStack) {
+  /**
+   * add all numbers up to and including both of the first highest-priority operands, followed by the highest-priority operator
+   * @param infixArrayList
+   * @return
+   */
+  Stack<String> infixToPostfixStack(ArrayList infixArrayList) {
+    Stack<String> postfixStack = new Stack<>();
+    for(int i = 0; i < infixArrayList.size(); i++) {
 
     }
-    return "";
+    return postfixStack;
   }
 
   /**
@@ -30,26 +35,27 @@ public class MathEvaluator {
    * @param infixString
    * @return infixStack
    */
-  Stack<String> infixStringToStack(String infixString) {
-    Stack<String> infixStack = new Stack<>();
+  ArrayList<String> infixStringToArrayList(String infixString) {
+    ArrayList<String> infixArrayList = new ArrayList<>();
     final String validNumbers = "0123456789.";
     for(int i = 0; i < infixString.length(); i++) {
+      int infixArrayListLast = infixArrayList.size() - 1;
       String nextChar = String.valueOf(infixString.charAt(i));
-      String prevChar = infixStack.size() > 0 ? String.valueOf(infixStack.peek().charAt(0)) : " ";
+      String prevChar = infixArrayList.size() > 0 ? String.valueOf(infixArrayList.get(infixArrayListLast)) : " ";
       if(validNumbers.contains(nextChar)) {
-        if(validNumbers.contains(prevChar) && infixStack.size() > 0) {
-          prevChar = infixStack.pop();
+        if(validNumbers.contains(prevChar) && infixArrayList.size() > 0) {
+          prevChar = infixArrayList.remove(infixArrayListLast);
           nextChar = prevChar + nextChar;
         }
-        infixStack.push(nextChar);
+        infixArrayList.add(nextChar);
       } else if(!nextChar.equals(" ")) {
-        infixStack.push(nextChar);
+        infixArrayList.add(nextChar);
       }
     }
-    return infixStack;
+    return infixArrayList;
   }
 
-  private double calcFromPostfix(String postfix) {
+  private double calcFromPostfix(Stack<String> postfixStack) {
     return 0;
   }
 
