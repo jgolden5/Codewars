@@ -7,7 +7,7 @@ public class MathEvaluator {
 
   public double calcFromInfix(String infix) {
     ArrayList<String> infixArrayList = infixStringToArrayList(infix);
-    Stack<String> postfixStack = infixToPostfixStack(infixArrayList);
+    Stack<String> postfixStack = infixArrayListToPostfixStack(infixArrayList);
     return calcFromPostfix(postfixStack);
   }
 
@@ -16,7 +16,7 @@ public class MathEvaluator {
    * @param infixArrayList
    * @return
    */
-  Stack<String> infixToPostfixStack(ArrayList infixArrayList) {
+  Stack<String> infixArrayListToPostfixStack(ArrayList infixArrayList) {
     Stack<String> postfixStack = new Stack<>();
     for(int i = 0; i < infixArrayList.size(); i++) {
 
@@ -41,9 +41,9 @@ public class MathEvaluator {
     for(int i = 0; i < infixString.length(); i++) {
       int infixArrayListLast = infixArrayList.size() - 1;
       String nextChar = String.valueOf(infixString.charAt(i));
-      String prevChar = infixArrayList.size() > 0 ? String.valueOf(infixArrayList.get(infixArrayListLast)) : " ";
+      String prevChar = infixArrayList.size() > 0 ? String.valueOf(infixArrayList.get(infixArrayListLast).charAt(0)) : " ";
       if(validNumbers.contains(nextChar)) {
-        if(validNumbers.contains(prevChar) && infixArrayList.size() > 0) {
+        if(validNumbers.contains(prevChar)) {
           prevChar = infixArrayList.remove(infixArrayListLast);
           nextChar = prevChar + nextChar;
         }
