@@ -14,6 +14,7 @@ public class MathEvaluator {
   ArrayList<String> infixToPostfixArrayList(ArrayList<String> infixArrayList) {
     ArrayList<String> postfixArrayList = new ArrayList<>();
     Stack<String> opStack = new Stack<>();
+    int parenthesesToClose = 0;
     for(int i = 0; i < infixArrayList.size(); i++) {
       String currentInfix = infixArrayList.get(i);
       boolean currentInfixIsOp = "*/+-".contains(currentInfix);
@@ -24,12 +25,18 @@ public class MathEvaluator {
         postfixArrayList.add(currentInfix);
       } else if(currentInfixIsHigherPriorityThanOpHead) {
         opStack.push(currentInfix);
-      } else {
-        while(!currentInfixIsHigherPriorityThanOpHead && !opStack.isEmpty()) {
+      } else if(parenthesesToClose > 0 && currentInfix.equals(")")) {
+        while(!opStack.peek().equals("(")) {
           postfixArrayList.add(opStack.pop());
-          currentInfixIsHigherPriorityThanOpHead = "*/".contains(currentInfix) && "+-".contains(opStack.peek());
         }
-        opStack.push(currentInfix);
+        opStack.pop();
+        parenthesesToClose--;
+      } else {
+          while(!currentInfixIsHigherPriorityThanOpHead && !opStack.isEmpty()) {
+            postfixArrayList.add(opStack.pop());
+            currentInfixIsHigherPriorityThanOpHead = "*/".contains(currentInfix) && "+-".contains(opStack.peek());
+          }
+          opStack.push(currentInfix);
       }
     }
     while(!opStack.isEmpty()) {
