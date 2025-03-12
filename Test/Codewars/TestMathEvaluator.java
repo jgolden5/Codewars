@@ -388,6 +388,20 @@ public class TestMathEvaluator {
     simplePostfix3.add("6");
     simplePostfix3.add("+");
     assertEquals(simplePostfix3, math.infixToPostfixArrayList(simpleInfix3));
+
+    ArrayList<String> mdasInfix1 = new ArrayList<>();
+    mdasInfix1.add("9");
+    mdasInfix1.add("-");
+    mdasInfix1.add("8");
+    mdasInfix1.add("/");
+    mdasInfix1.add("4");
+    ArrayList<String> mdasPostfix1 = new ArrayList<>();
+    mdasPostfix1.add("9");
+    mdasPostfix1.add("8");
+    mdasPostfix1.add("4");
+    mdasPostfix1.add("/");
+    mdasPostfix1.add("-");
+    assertEquals(mdasPostfix1, math.infixToPostfixArrayList(mdasInfix1));
   }
 
 }
