@@ -480,6 +480,36 @@ public class TestMathEvaluator {
     mdasPostfix4.add("*");
     mdasPostfix4.add("+");
     assertEquals(mdasPostfix4, math.infixToPostfixArrayList(mdasInfix4));
+
+    ArrayList<String> mdasInfix5 = new ArrayList<>();
+    mdasInfix5.add("1");
+    mdasInfix5.add("+");
+    mdasInfix5.add("3");
+    mdasInfix5.add("-");
+    mdasInfix5.add("9");
+    mdasInfix5.add("*");
+    mdasInfix5.add("3");
+    mdasInfix5.add("/");
+    mdasInfix5.add("6");
+    mdasInfix5.add("*");
+    mdasInfix5.add("14");
+    mdasInfix5.add("+");
+    mdasInfix5.add("100");
+    ArrayList<String> mdasPostfix5 = new ArrayList<>();
+    mdasPostfix5.add("1");
+    mdasPostfix5.add("3");
+    mdasPostfix5.add("+");
+    mdasPostfix5.add("9");
+    mdasPostfix5.add("3");
+    mdasPostfix5.add("*");
+    mdasPostfix5.add("6");
+    mdasPostfix5.add("/");
+    mdasPostfix5.add("14");
+    mdasPostfix5.add("*");
+    mdasPostfix5.add("-");
+    mdasPostfix5.add("100");
+    mdasPostfix5.add("+");
+    assertEquals(mdasPostfix5, math.infixToPostfixArrayList(mdasInfix5));
   }
 
 }
