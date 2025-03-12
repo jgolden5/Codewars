@@ -352,6 +352,7 @@ public class TestMathEvaluator {
     simplePostfix1.add("4");
     simplePostfix1.add("+");
     assertEquals(simplePostfix1, math.infixToPostfixArrayList(simpleInfix1));
+
   }
 
 }

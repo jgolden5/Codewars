@@ -13,8 +13,24 @@ public class MathEvaluator {
 
   ArrayList<String> infixToPostfixArrayList(ArrayList<String> infixArrayList) {
     ArrayList<String> postfixArrayList = new ArrayList<>();
+    Stack<String> opStack = new Stack<>();
     for(int i = 0; i < infixArrayList.size(); i++) {
-
+      String currentInfix = infixArrayList.get(i);
+      boolean currentInfixIsOp = "*/+-".contains(currentInfix);
+      boolean currentInfixIsHigherPriorityThanOpHead = "*/".contains(currentInfix) && "+-".contains(opStack.peek());
+      if(!currentInfixIsOp) {
+        postfixArrayList.add(currentInfix);
+      } else if(!currentInfixIsHigherPriorityThanOpHead) {
+        opStack.push(currentInfix);
+      } else {
+        while(!opStack.isEmpty()) {
+          postfixArrayList.add(opStack.pop());
+        }
+        opStack.push(currentInfix);
+      }
+    }
+    while(!opStack.isEmpty()) {
+      postfixArrayList.add(opStack.pop());
     }
     return postfixArrayList;
   }
