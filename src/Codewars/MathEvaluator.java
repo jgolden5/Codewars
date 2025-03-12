@@ -25,8 +25,9 @@ public class MathEvaluator {
       } else if(currentInfixIsHigherPriorityThanOpHead) {
         opStack.push(currentInfix);
       } else {
-        while(!opStack.isEmpty()) {
+        while(!currentInfixIsHigherPriorityThanOpHead && !opStack.isEmpty()) {
           postfixArrayList.add(opStack.pop());
+          currentInfixIsHigherPriorityThanOpHead = "*/".contains(currentInfix) && "+-".contains(opStack.peek());
         }
         opStack.push(currentInfix);
       }
