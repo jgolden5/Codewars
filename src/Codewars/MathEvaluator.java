@@ -18,48 +18,10 @@ public class MathEvaluator {
    */
   Stack<String> infixArrayListToPostfixStack(ArrayList<String> infixArrayList) {
     Stack<String> postfixStack = new Stack<>();
-    ArrayList<String> unorderedOps = getUnorderedOps(infixArrayList);
-    ArrayList<ArrayList<String>> orderedOps = getOrderedOps(unorderedOps);
     for(int i = 0; i < infixArrayList.size(); i++) {
-      String nextChar = infixArrayList.get(i);
+      
     }
     return postfixStack;
-  }
-
-  ArrayList<ArrayList<String>> getOrderedOps(ArrayList<String> unorderedOps) {
-    ArrayList<ArrayList<String>> orderedOps = new ArrayList<>();
-    final String[] checks = new String[]{"()", "*/", "+-"};
-    boolean needToCloseParentheses = false;
-    for(String currentCheck : checks) {
-      ArrayList<String> nextOpPriority = new ArrayList<>();
-      for (String currentOp : unorderedOps) {
-        if (needToCloseParentheses) {
-          if(currentOp.equals(")")) {
-            needToCloseParentheses = false;
-          } else if(currentCheck.equals("()")) {
-            nextOpPriority.add(currentOp);
-          }
-        } else if(currentCheck.contains(currentOp) && !currentCheck.equals("()")) {
-          nextOpPriority.add(currentOp);
-        }
-        if(currentOp.equals("(")) {
-          needToCloseParentheses = true;
-        }
-      }
-      orderedOps.add(nextOpPriority);
-    }
-    return orderedOps;
-  }
-
-  public ArrayList<String> getUnorderedOps(ArrayList<String> infixArrayList) {
-    ArrayList<String> unorderedOps = new ArrayList<>();
-    for(int i = 0; i < infixArrayList.size(); i++) {
-      String firstCharOfNextAsString = String.valueOf(infixArrayList.get(i).charAt(0));
-      if(!"0123456789.".contains(firstCharOfNextAsString)) {
-        unorderedOps.add(firstCharOfNextAsString);
-      }
-    }
-    return unorderedOps;
   }
 
   /**

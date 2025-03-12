@@ -341,43 +341,4 @@ public class TestMathEvaluator {
     assertEquals(advanced2, math.infixStringToArrayList("(-2.5+ 11.5)-(((80 -(19))) *33.25))       /4*     0"));
   }
 
-  @Test
-  public void getOrderedOps() {
-    //A: Works with basic pmdas
-    ArrayList<String> basicUnordered1 = new ArrayList<>();
-    basicUnordered1.add("+");
-    basicUnordered1.add("(");
-    basicUnordered1.add("-");
-    basicUnordered1.add(")");
-    basicUnordered1.add("*");
-    ArrayList<ArrayList<String>> basicOrdered1 = new ArrayList<>();
-    ArrayList<String> basicOrderedP1 = new ArrayList<>();
-    basicOrderedP1.add("-");
-    ArrayList<String> basicOrderedMD1 = new ArrayList<>();
-    basicOrderedMD1.add("*");
-    ArrayList<String> basicOrderedAS1 = new ArrayList<>();
-    basicOrderedAS1.add("+");
-    basicOrdered1.add(basicOrderedP1);
-    basicOrdered1.add(basicOrderedMD1);
-    basicOrdered1.add(basicOrderedAS1);
-    assertEquals(basicOrdered1, math.getOrderedOps(basicUnordered1));
-  }
-
-  /*
-  @Test
-  public void infixArrayListToPostfixStack() {
-    //A: test simple infix to postfix
-    ArrayList<String> simpleInfix1 = new ArrayList<>();
-    simpleInfix1.add("1");
-    simpleInfix1.add("+");
-    simpleInfix1.add("2");
-    ArrayList<String> simplePostfix1 = new ArrayList<>();
-    simplePostfix1.add("1");
-    simplePostfix1.add("2");
-    simplePostfix1.add("+");
-    assertEquals(simplePostfix1, math.infixArrayListToPostfixStack(simpleInfix1));
-
-  }
-   */
-
 }
