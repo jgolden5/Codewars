@@ -341,4 +341,17 @@ public class TestMathEvaluator {
     assertEquals(advanced2, math.infixStringToArrayList("(-2.5+ 11.5)-(((80 -(19))) *33.25))       /4*     0"));
   }
 
+  @Test
+  public void infixToPostfixArrayList() {
+    ArrayList<String> simpleInfix1 = new ArrayList<>();
+    simpleInfix1.add("3");
+    simpleInfix1.add("+");
+    simpleInfix1.add("4");
+    ArrayList<String> simplePostfix1 = new ArrayList<>();
+    simplePostfix1.add("3");
+    simplePostfix1.add("4");
+    simplePostfix1.add("+");
+    assertEquals(simplePostfix1, math.infixToPostfixArrayList(simpleInfix1));
+  }
+
 }

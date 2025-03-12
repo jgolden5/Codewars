@@ -7,21 +7,16 @@ public class MathEvaluator {
 
   public double calcFromInfix(String infix) {
     ArrayList<String> infixArrayList = infixStringToArrayList(infix);
-    Stack<String> postfixStack = infixArrayListToPostfixStack(infixArrayList);
+    ArrayList<String> postfixStack = infixToPostfixArrayList(infixArrayList);
     return calcFromPostfix(postfixStack);
   }
 
-  /**
-   * add all numbers up to and including both of the first highest-priority operands, followed by the highest-priority operator
-   * @param infixArrayList
-   * @return
-   */
-  Stack<String> infixArrayListToPostfixStack(ArrayList<String> infixArrayList) {
-    Stack<String> postfixStack = new Stack<>();
+  ArrayList<String> infixToPostfixArrayList(ArrayList<String> infixArrayList) {
+    ArrayList<String> postfixArrayList = new ArrayList<>();
     for(int i = 0; i < infixArrayList.size(); i++) {
-      
+
     }
-    return postfixStack;
+    return postfixArrayList;
   }
 
   /**
@@ -55,7 +50,7 @@ public class MathEvaluator {
     return infixArrayList;
   }
 
-  private double calcFromPostfix(Stack<String> postfixStack) {
+  private double calcFromPostfix(ArrayList<String> postfixStack) {
     return 0;
   }
 
