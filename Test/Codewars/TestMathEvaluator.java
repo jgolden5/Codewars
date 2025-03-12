@@ -402,6 +402,32 @@ public class TestMathEvaluator {
     mdasPostfix1.add("/");
     mdasPostfix1.add("-");
     assertEquals(mdasPostfix1, math.infixToPostfixArrayList(mdasInfix1));
+
+    ArrayList<String> mdasInfix2 = new ArrayList<>();
+    mdasInfix2.add("5");
+    mdasInfix2.add("*");
+    mdasInfix2.add("2");
+    mdasInfix2.add("-");
+    mdasInfix2.add("8");
+    mdasInfix2.add("/");
+    mdasInfix2.add("4");
+    mdasInfix2.add("+");
+    mdasInfix2.add("0");
+    mdasInfix2.add("*");
+    mdasInfix2.add("6");
+    ArrayList<String> mdasPostfix2 = new ArrayList<>();
+    mdasPostfix2.add("5");
+    mdasPostfix2.add("2");
+    mdasPostfix2.add("*");
+    mdasPostfix2.add("8");
+    mdasPostfix2.add("4");
+    mdasPostfix2.add("/");
+    mdasPostfix2.add("-");
+    mdasPostfix2.add("0");
+    mdasPostfix2.add("6");
+    mdasPostfix2.add("*");
+    mdasPostfix2.add("+");
+    assertEquals(mdasPostfix2, math.infixToPostfixArrayList(mdasInfix2));
   }
 
 }

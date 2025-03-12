@@ -17,7 +17,9 @@ public class MathEvaluator {
     for(int i = 0; i < infixArrayList.size(); i++) {
       String currentInfix = infixArrayList.get(i);
       boolean currentInfixIsOp = "*/+-".contains(currentInfix);
-      boolean currentInfixIsHigherPriorityThanOpHead = "*/".contains(currentInfix) && "+-".contains(opStack.peek());
+      boolean currentInfixIsHigherPriorityThanOpHead = !opStack.isEmpty() &&
+                                                        "*/".contains(currentInfix) &&
+                                                        "+-".contains(opStack.peek());
       if(!currentInfixIsOp) {
         postfixArrayList.add(currentInfix);
       } else if(currentInfixIsHigherPriorityThanOpHead) {
