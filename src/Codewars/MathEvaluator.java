@@ -20,7 +20,7 @@ public class MathEvaluator {
       boolean currentInfixIsHigherPriorityThanOpHead = "*/".contains(currentInfix) && "+-".contains(opStack.peek());
       if(!currentInfixIsOp) {
         postfixArrayList.add(currentInfix);
-      } else if(!currentInfixIsHigherPriorityThanOpHead) {
+      } else if(currentInfixIsHigherPriorityThanOpHead) {
         opStack.push(currentInfix);
       } else {
         while(!opStack.isEmpty()) {

@@ -353,6 +353,19 @@ public class TestMathEvaluator {
     simplePostfix1.add("+");
     assertEquals(simplePostfix1, math.infixToPostfixArrayList(simpleInfix1));
 
+    ArrayList<String> simpleInfix2 = new ArrayList<>();
+    simpleInfix2.add("6");
+    simpleInfix2.add("+");
+    simpleInfix2.add("4");
+    simpleInfix2.add("-");
+    simpleInfix2.add("5");
+    ArrayList<String> simplePostfix2 = new ArrayList<>();
+    simplePostfix2.add("6");
+    simplePostfix2.add("4");
+    simplePostfix2.add("+");
+    simplePostfix2.add("5");
+    simplePostfix2.add("-");
+    assertEquals(simplePostfix2, math.infixToPostfixArrayList(simpleInfix2));
   }
 
 }
