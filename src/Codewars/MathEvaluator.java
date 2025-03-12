@@ -17,13 +17,15 @@ public class MathEvaluator {
     int parenthesesToClose = 0;
     for(int i = 0; i < infixArrayList.size(); i++) {
       String currentInfix = infixArrayList.get(i);
-      boolean currentInfixIsOp = "*/+-".contains(currentInfix);
-      boolean currentInfixIsHigherPriorityThanOpHead = !opStack.isEmpty() &&
-                                                        "*/".contains(currentInfix) &&
-                                                        "+-".contains(opStack.peek());
+      boolean currentInfixIsOp = "()*/+-".contains(currentInfix);
+      parenthesesToClose = currentInfix.equals("(") ? ++parenthesesToClose : parenthesesToClose;
+      boolean currentInfixIsHigherPriorityThanOpHead = parenthesesToClose > 0 ||
+                                                       !opStack.isEmpty() &&
+                                                       "*/".contains(currentInfix) &&
+                                                       "+-".contains(opStack.peek());
       if(!currentInfixIsOp) {
         postfixArrayList.add(currentInfix);
-      } else if(currentInfixIsHigherPriorityThanOpHead) {
+      } else if(currentInfixIsHigherPriorityThanOpHead && parenthesesToClose == 0) {
         opStack.push(currentInfix);
       } else if(parenthesesToClose > 0 && currentInfix.equals(")")) {
         while(!opStack.peek().equals("(")) {
