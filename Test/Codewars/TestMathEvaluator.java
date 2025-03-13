@@ -555,6 +555,31 @@ public class TestMathEvaluator {
     parenPostfix2.add("+");
     assertEquals(parenPostfix2, math.infixToPostfixArrayList(parenInfix2));
 
+    ArrayList<String> parenInfix3 = new ArrayList<>();
+    parenInfix3.add("1");
+    parenInfix3.add("-");
+    parenInfix3.add("(");
+    parenInfix3.add("2");
+    parenInfix3.add("+");
+    parenInfix3.add("(");
+    parenInfix3.add("3");
+    parenInfix3.add("-");
+    parenInfix3.add("2");
+    parenInfix3.add(")");
+    parenInfix3.add(")");
+    parenInfix3.add("*");
+    parenInfix3.add("4");
+    ArrayList<String> parenPostfix3 = new ArrayList<>();
+    parenPostfix3.add("1");
+    parenPostfix3.add("2");
+    parenPostfix3.add("3");
+    parenPostfix3.add("2");
+    parenPostfix3.add("-");
+    parenPostfix3.add("+");
+    parenPostfix3.add("4");
+    parenPostfix3.add("*");
+    parenPostfix3.add("-");
+    assertEquals(parenPostfix3, math.infixToPostfixArrayList(parenInfix3));
   }
 
 }
