@@ -35,14 +35,9 @@ public class MathEvaluator {
         }
         opStack.pop();
       } else {
-        boolean shouldPopOpHeadToPostfixResult = !opStack.isEmpty() &&
-                                                 !opStack.peek().equals("(") &&
-                                                 ("*/".contains(token) && "*/".contains(opStack.peek()) || "+-".contains(token));
-        while(shouldPopOpHeadToPostfixResult) {
-          postfixResult.add(opStack.pop());
-          shouldPopOpHeadToPostfixResult = !opStack.isEmpty() &&
-                                           !opStack.peek().equals("(") &&
-                                           ("*/".contains(token) && "*/".contains(opStack.peek()) || "+-".contains(token));
+        while(!opStack.isEmpty() && !opStack.peek().equals("(") &&
+          ("*/".contains(token) && "*/".contains(opStack.peek()) || "+-".contains(token))) {
+            postfixResult.add(opStack.pop());
         }
         opStack.push(token);
       }
