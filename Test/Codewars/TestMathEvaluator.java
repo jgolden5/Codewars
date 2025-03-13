@@ -770,4 +770,26 @@ public class TestMathEvaluator {
 
   }
 
+  @Test //final test
+  public void calculate() {
+    String simple1 = "1 + 2";
+    assertEquals(3, math.calculate(simple1));
+
+    String simple2 = "9 * 3";
+    assertEquals(27, math.calculate(simple2));
+
+    String simple3 = "12 / 6";
+    assertEquals(2, math.calculate(simple3));
+
+    String simple4 = "4 - 2";
+    assertEquals(2, math.calculate(simple4));
+
+    String simple5 = "-38 + 2";
+    assertEquals(-36, math.calculate(simple5));
+
+    String simple6 = "3 * -2";
+    assertEquals(-6, math.calculate(simple6));
+
+  }
+
 }

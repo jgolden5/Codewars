@@ -5,7 +5,7 @@ import java.util.Stack;
 
 public class MathEvaluator {
 
-  public double calcFromInfix(String infix) {
+  public double calculate(String infix) {
     ArrayList<String> infixArrayList = infixStringToArrayList(infix);
     ArrayList<String> postfixStack = infixToPostfixArrayList(infixArrayList);
     return rpnCalculator(postfixStack);
