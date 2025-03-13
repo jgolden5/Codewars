@@ -80,7 +80,19 @@ public class MathEvaluator {
       postfixResult.add(opStack.pop());
     }
     if(!validatePostfix(postfixResult)) {
-      postfixResult = infixToPostfixArrayList(postfixResult);
+      if(postfixResult.get(postfixResult.size() - 1).equals("-")) {
+        postfixResult.remove(postfixResult.size() - 1);
+        int lastIndexOfNum = -1;
+        for(int i = 0; i < postfixResult.size(); i++) {
+          if(!"*/+-".contains(postfixResult.get(i))) {
+            lastIndexOfNum = i;
+          }
+        }
+        String last = postfixResult.get(lastIndexOfNum);
+        postfixResult.remove(lastIndexOfNum);
+        postfixResult.add(lastIndexOfNum, "-" + last);
+        postfixResult = infixToPostfixArrayList(postfixResult);
+      }
     }
     return postfixResult;
   }
