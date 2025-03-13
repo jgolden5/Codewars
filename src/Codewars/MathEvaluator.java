@@ -34,7 +34,7 @@ public class MathEvaluator {
             break;
           case "-":
             y = operandStack.pop();
-            x = !operandStack.isEmpty() ? operandStack.pop() : 0;
+            x = operandStack.isEmpty() ? 0 : operandStack.pop();
             operandStack.push(x - y);
             break;
         }

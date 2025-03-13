@@ -663,6 +663,34 @@ public class TestMathEvaluator {
     simple1.add("3");
     simple1.add("+");
     assertEquals(5, math.rpnCalculator(simple1));
+
+    ArrayList<String> simple2 = new ArrayList<>();
+    simple2.add("1");
+    simple2.add("3");
+    simple2.add("-");
+    assertEquals(-2, math.rpnCalculator(simple2));
+
+    ArrayList<String> simple3 = new ArrayList<>();
+    simple3.add("9");
+    simple3.add("3");
+    simple3.add("*");
+    assertEquals(27, math.rpnCalculator(simple3));
+
+    ArrayList<String> simple4 = new ArrayList<>();
+    simple4.add("12");
+    simple4.add("3");
+    simple4.add("/");
+    assertEquals(4, math.rpnCalculator(simple4));
+
+    ArrayList<String> simple5 = new ArrayList<>();
+    simple5.add("5");
+    simple5.add("-");
+    assertEquals(-5, math.rpnCalculator(simple5));
+
+    ArrayList<String> simple6 = new ArrayList<>();
+    simple6.add("-6");
+    simple6.add("-");
+    assertEquals(6, math.rpnCalculator(simple6));
   }
 
 }
