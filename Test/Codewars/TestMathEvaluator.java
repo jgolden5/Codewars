@@ -770,6 +770,16 @@ public class TestMathEvaluator {
 
   }
 
+  @Test
+  public void removeExtraMinusesFromPostfixArrayList() {
+    ArrayList<String> basic1Before = new ArrayList<>();
+    basic1Before.add("1");
+    basic1Before.add("-");
+    ArrayList<String> basic1After = new ArrayList<>();
+    basic1After.add("-1");
+    assertEquals(basic1After, math.removeExtraMinusesFromPostfixArrayList(basic1Before));
+  }
+
   @Test //final test
   public void calculate() {
     String simple1 = "1 + 2";
