@@ -660,9 +660,9 @@ public class TestMathEvaluator {
   public void rpnCalculator() {
     ArrayList<String> simple1 = new ArrayList<>();
     simple1.add("2");
-    simple1.add("2");
+    simple1.add("3");
     simple1.add("+");
-    assertEquals(4, math.rpnCalculator(simple1));
+    assertEquals(5, math.rpnCalculator(simple1));
   }
 
 }

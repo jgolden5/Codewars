@@ -12,11 +12,37 @@ public class MathEvaluator {
   }
 
   double rpnCalculator(ArrayList<String> postfixArrayList) {
-    double result = 0;
+    Stack<Double> operandStack = new Stack<>();
     for(String token : postfixArrayList) {
-      
+      if("*/+-".contains(token)) {
+        double x, y;
+        switch(token) {
+          case "*":
+            y = operandStack.pop();
+            x = operandStack.pop();
+            operandStack.push(x * y);
+            break;
+          case "/":
+            y = operandStack.pop();
+            x = operandStack.pop();
+            operandStack.push(x / y);
+            break;
+          case "+":
+            y = operandStack.pop();
+            x = operandStack.pop();
+            operandStack.push(x + y);
+            break;
+          case "-":
+            y = operandStack.pop();
+            x = !operandStack.isEmpty() ? operandStack.pop() : 0;
+            operandStack.push(x - y);
+            break;
+        }
+      } else {
+        operandStack.push(Double.parseDouble(token));
+      }
     }
-    return result;
+    return operandStack.pop();
   }
 
   /**
