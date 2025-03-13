@@ -639,8 +639,7 @@ public class TestMathEvaluator {
     parenInfix5.add("*");
     parenInfix5.add("0");
     ArrayList<String> parenPostfix5 = new ArrayList<>();
-    parenPostfix5.add("2.5");
-    parenPostfix5.add("-");
+    parenPostfix5.add("-2.5");
     parenPostfix5.add("11.5");
     parenPostfix5.add("+");
     parenPostfix5.add("80");
@@ -684,20 +683,19 @@ public class TestMathEvaluator {
 
     ArrayList<String> simple5 = new ArrayList<>();
     simple5.add("5");
-    simple5.add("-");
-    assertEquals(-5, math.rpnCalculator(simple5));
+    assertEquals(5, math.rpnCalculator(simple5));
 
     ArrayList<String> simple6 = new ArrayList<>();
     simple6.add("-6");
-    simple6.add("-");
-    assertEquals(6, math.rpnCalculator(simple6));
+    assertEquals(-6, math.rpnCalculator(simple6));
 
     ArrayList<String> compound1 = new ArrayList<>();
     compound1.add("6");
+    compound1.add("3");
     compound1.add("-");
     compound1.add("8");
     compound1.add("+");
-    assertEquals(2, math.rpnCalculator(compound1));
+    assertEquals(11, math.rpnCalculator(compound1));
 
     ArrayList<String> compound2 = new ArrayList<>();
     compound2.add("5");
@@ -763,21 +761,10 @@ public class TestMathEvaluator {
     compound8.add("4");
     compound8.add("/");
     compound8.add("-");
+    compound8.add("-6");
     compound8.add("+");
-    compound8.add("6");
-    compound8.add("-");
     assertEquals(16, math.rpnCalculator(compound8));
 
-  }
-
-  @Test
-  public void removeExtraMinusesFromPostfixArrayList() {
-    ArrayList<String> basic1Before = new ArrayList<>();
-    basic1Before.add("1");
-    basic1Before.add("-");
-    ArrayList<String> basic1After = new ArrayList<>();
-    basic1After.add("-1");
-    assertEquals(basic1After, math.removeExtraMinusesFromPostfixArrayList(basic1Before));
   }
 
   @Test //final test

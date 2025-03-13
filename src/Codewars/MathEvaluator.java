@@ -8,8 +8,7 @@ public class MathEvaluator {
   public double calculate(String infix) {
     ArrayList<String> infixArrayList = infixStringToArrayList(infix);
     ArrayList<String> postfixArrayList = infixToPostfixArrayList(infixArrayList);
-    ArrayList<String> postfixArrayListWithExtraMinusesRemoved = removeExtraMinusesFromPostfixArrayList(postfixArrayList);
-    return rpnCalculator(postfixArrayListWithExtraMinusesRemoved);
+    return rpnCalculator(postfixArrayList);
   }
 
   double rpnCalculator(ArrayList<String> postfixArrayList) {
@@ -46,29 +45,6 @@ public class MathEvaluator {
     return operandStack.pop();
   }
 
-  ArrayList<String> removeExtraMinusesFromPostfixArrayList(ArrayList<String> postfixArrayList) {
-    int opCount = 0;
-    int numCount = 0;
-    int iOfLastNum = -1;
-    for(int i = 0; i < postfixArrayList.size(); i++) {
-      String token = postfixArrayList.get(i);
-      if("*/+-".contains(token)) {
-        opCount++;
-      } else {
-        numCount++;
-        iOfLastNum = i;
-      }
-      if(opCount >= numCount && token.equals("-") && iOfLastNum >= 0) {
-        String lastNum = postfixArrayList.get(iOfLastNum);
-        postfixArrayList.remove(iOfLastNum);
-        postfixArrayList.add(iOfLastNum, "-" + lastNum);
-        postfixArrayList.remove(i);
-        i--;
-      }
-    }
-    return postfixArrayList;
-  }
-
   /**
    * loop through every element of infixArrayList
      * if !"()*\/+-".contains(currentInfix)
@@ -103,7 +79,23 @@ public class MathEvaluator {
     while(!opStack.isEmpty()) {
       postfixResult.add(opStack.pop());
     }
+    if(!validatePostfix(postfixResult)) {
+      postfixResult = infixToPostfixArrayList(postfixResult);
+    }
     return postfixResult;
+  }
+
+  private boolean validatePostfix(ArrayList<String> postfixResult) {
+    int numCount = 0;
+    int opCount = 0;
+    for(String token : postfixResult) {
+      if("*/+-".contains(token)) {
+        opCount++;
+      } else {
+        numCount++;
+      }
+    }
+    return numCount == opCount + 1;
   }
 
   /**
