@@ -691,6 +691,83 @@ public class TestMathEvaluator {
     simple6.add("-6");
     simple6.add("-");
     assertEquals(6, math.rpnCalculator(simple6));
+
+    ArrayList<String> compound1 = new ArrayList<>();
+    compound1.add("6");
+    compound1.add("-");
+    compound1.add("8");
+    compound1.add("+");
+    assertEquals(2, math.rpnCalculator(compound1));
+
+    ArrayList<String> compound2 = new ArrayList<>();
+    compound2.add("5");
+    compound2.add("3");
+    compound2.add("6");
+    compound2.add("*");
+    compound2.add("+");
+    assertEquals(23, math.rpnCalculator(compound2));
+
+    ArrayList<String> compound3 = new ArrayList<>();
+    compound3.add("1");
+    compound3.add("2");
+    compound3.add("*");
+    compound3.add("4");
+    compound3.add("+");
+    assertEquals(6, math.rpnCalculator(compound3));
+
+    ArrayList<String> compound4 = new ArrayList<>();
+    compound4.add("1");
+    compound4.add("2");
+    compound4.add("+");
+    compound4.add("9");
+    compound4.add("3");
+    compound4.add("/");
+    compound4.add("-");
+    assertEquals(0, math.rpnCalculator(compound4));
+
+    ArrayList<String> compound5 = new ArrayList<>();
+    compound5.add("1");
+    compound5.add("2");
+    compound5.add("8");
+    compound5.add("*");
+    compound5.add("4");
+    compound5.add("/");
+    compound5.add("+");
+    assertEquals(5, math.rpnCalculator(compound5));
+
+    ArrayList<String> compound6 = new ArrayList<>();
+    compound6.add("6");
+    compound6.add("7");
+    compound6.add("+");
+    compound6.add("8");
+    compound6.add("9");
+    compound6.add("*");
+    compound6.add("-");
+    compound6.add("10");
+    compound6.add("+");
+    assertEquals(-49, math.rpnCalculator(compound6));
+
+    ArrayList<String> compound7 = new ArrayList<>();
+    compound7.add("1.2");
+    compound7.add("3.4");
+    compound7.add("+");
+    compound7.add("9.9");
+    compound7.add("*");
+    assertEquals(45.54, math.rpnCalculator(compound7));
+
+    ArrayList<String> compound8 = new ArrayList<>();
+    compound8.add("8");
+    compound8.add("3");
+    compound8.add("*");
+    compound8.add("8");
+    compound8.add("4");
+    compound8.add("/");
+    compound8.add("-");
+    compound8.add("+");
+    compound8.add("6");
+    compound8.add("-");
+    assertEquals(16, math.rpnCalculator(compound8));
+
   }
 
 }

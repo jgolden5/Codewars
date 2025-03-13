@@ -29,7 +29,7 @@ public class MathEvaluator {
             break;
           case "+":
             y = operandStack.pop();
-            x = operandStack.pop();
+            x = operandStack.isEmpty() ? 0 : operandStack.pop();
             operandStack.push(x + y);
             break;
           case "-":
