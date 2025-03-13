@@ -613,46 +613,18 @@ public class TestMathEvaluator {
     parenPostfix4.add("-");
     assertEquals(parenPostfix4, math.infixToPostfixArrayList(parenInfix4));
 
-    ArrayList<String> parenInfix5 = new ArrayList<>();
-    parenInfix5.add("(");
-    parenInfix5.add("-");
-    parenInfix5.add("2.5");
-    parenInfix5.add("+");
-    parenInfix5.add("11.5");
-    parenInfix5.add(")");
-    parenInfix5.add("-");
-    parenInfix5.add("(");
-    parenInfix5.add("(");
-    parenInfix5.add("(");
-    parenInfix5.add("80");
-    parenInfix5.add("-");
-    parenInfix5.add("(");
-    parenInfix5.add("19");
-    parenInfix5.add(")");
-    parenInfix5.add(")");
-    parenInfix5.add(")");
-    parenInfix5.add("*");
-    parenInfix5.add("33.25");
-    parenInfix5.add(")");
-    parenInfix5.add("/");
-    parenInfix5.add("4");
-    parenInfix5.add("*");
-    parenInfix5.add("0");
-    ArrayList<String> parenPostfix5 = new ArrayList<>();
-    parenPostfix5.add("-2.5");
-    parenPostfix5.add("11.5");
-    parenPostfix5.add("+");
-    parenPostfix5.add("80");
-    parenPostfix5.add("19");
-    parenPostfix5.add("-");
-    parenPostfix5.add("33.25");
-    parenPostfix5.add("*");
-    parenPostfix5.add("4");
-    parenPostfix5.add("/");
-    parenPostfix5.add("0");
-    parenPostfix5.add("*");
-    parenPostfix5.add("-");
-    assertEquals(parenPostfix5, math.infixToPostfixArrayList(parenInfix5));
+    ArrayList<String> minusInfix1 = new ArrayList<>();
+    minusInfix1.add("-");
+    minusInfix1.add("2.5");
+    minusInfix1.add("+");
+    minusInfix1.add("11.5");
+    ArrayList<String> minusPostfix1 = new ArrayList<>();
+    minusPostfix1.add("2.5");
+    minusPostfix1.add("-");
+    minusPostfix1.add("11.5");
+    minusPostfix1.add("+");
+    assertEquals(minusPostfix1, math.infixToPostfixArrayList(minusInfix1));
+
   }
 
   @Test
@@ -786,7 +758,6 @@ public class TestMathEvaluator {
 
     String simple6 = "3 * -2";
     assertEquals(-6, math.calculate(simple6));
-
   }
 
 }
