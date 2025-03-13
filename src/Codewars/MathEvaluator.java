@@ -11,40 +11,46 @@ public class MathEvaluator {
     return calcFromPostfix(postfixStack);
   }
 
+  /**
+   * loop through every element of infixArrayList
+     * if !"()*\/+-".contains(currentInfix)
+       * add token to postfixResult
+     * else
+       * while shouldPopFromOpStackToPostfixResult
+         * postfixResult.add(opStack.pop())
+       * opStack.push(token)
+   * add any remaining elements from opStack to postfixArrayList
+   * @param infixArrayList
+   * @return
+   */
   ArrayList<String> infixToPostfixArrayList(ArrayList<String> infixArrayList) {
-    ArrayList<String> postfixArrayList = new ArrayList<>();
+    ArrayList<String> postfixResult = new ArrayList<>();
     Stack<String> opStack = new Stack<>();
-    int parenthesesToClose = 0;
-    for(int i = 0; i < infixArrayList.size(); i++) {
-      String currentInfix = infixArrayList.get(i);
-      boolean currentInfixIsOp = "()*/+-".contains(currentInfix);
-      parenthesesToClose = currentInfix.equals("(") ? ++parenthesesToClose : parenthesesToClose;
-      boolean currentInfixIsHigherPriorityThanOpHead = parenthesesToClose > 0 ||
-                                                       !opStack.isEmpty() &&
-                                                       "*/".contains(currentInfix) &&
-                                                       "+-".contains(opStack.peek());
-      if(!currentInfixIsOp) {
-        postfixArrayList.add(currentInfix);
-      } else if(currentInfixIsHigherPriorityThanOpHead && parenthesesToClose == 0) {
-        opStack.push(currentInfix);
-      } else if(parenthesesToClose > 0 && currentInfix.equals(")")) {
+    for (String token : infixArrayList) {
+      if(!"()*/+-".contains(token)) {
+        postfixResult.add(token);
+      } else if(token.equals(")")) {
         while(!opStack.peek().equals("(")) {
-          postfixArrayList.add(opStack.pop());
+          postfixResult.add(opStack.pop());
         }
         opStack.pop();
-        parenthesesToClose--;
       } else {
-          while(!currentInfixIsHigherPriorityThanOpHead && !opStack.isEmpty()) {
-            postfixArrayList.add(opStack.pop());
-            currentInfixIsHigherPriorityThanOpHead = "*/".contains(currentInfix) && "+-".contains(opStack.peek());
-          }
-          opStack.push(currentInfix);
+        boolean shouldPopOpHeadToPostfixResult = !opStack.isEmpty() &&
+                                                 !opStack.peek().equals("(") &&
+                                                 ("*/".contains(token) && "*/".contains(opStack.peek()) || "+-".contains(token));
+        while(shouldPopOpHeadToPostfixResult) {
+          postfixResult.add(opStack.pop());
+          shouldPopOpHeadToPostfixResult = !opStack.isEmpty() &&
+                                           !opStack.peek().equals("(") &&
+                                           ("*/".contains(token) && "*/".contains(opStack.peek()) || "+-".contains(token));
+        }
+        opStack.push(token);
       }
     }
     while(!opStack.isEmpty()) {
-      postfixArrayList.add(opStack.pop());
+      postfixResult.add(opStack.pop());
     }
-    return postfixArrayList;
+    return postfixResult;
   }
 
   /**
