@@ -47,11 +47,26 @@ public class MathEvaluator {
   }
 
   ArrayList<String> removeExtraMinusesFromPostfixArrayList(ArrayList<String> postfixArrayList) {
-    ArrayList<String> res = new ArrayList<>();
-    for(String token : postfixArrayList) {
-
+    int opCount = 0;
+    int numCount = 0;
+    int iOfLastNum = -1;
+    for(int i = 0; i < postfixArrayList.size(); i++) {
+      String token = postfixArrayList.get(i);
+      if("*/+-".contains(token)) {
+        opCount++;
+      } else {
+        numCount++;
+        iOfLastNum = i;
+      }
+      if(opCount >= numCount && token.equals("-") && iOfLastNum >= 0) {
+        String lastNum = postfixArrayList.get(iOfLastNum);
+        postfixArrayList.remove(iOfLastNum);
+        postfixArrayList.add(iOfLastNum, "-" + lastNum);
+        postfixArrayList.remove(i);
+        i--;
+      }
     }
-    return res;
+    return postfixArrayList;
   }
 
   /**
