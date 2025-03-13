@@ -656,4 +656,13 @@ public class TestMathEvaluator {
     assertEquals(parenPostfix5, math.infixToPostfixArrayList(parenInfix5));
   }
 
+  @Test
+  public void rpnCalculator() {
+    ArrayList<String> simple1 = new ArrayList<>();
+    simple1.add("2");
+    simple1.add("2");
+    simple1.add("+");
+    assertEquals(4, math.rpnCalculator(simple1));
+  }
+
 }

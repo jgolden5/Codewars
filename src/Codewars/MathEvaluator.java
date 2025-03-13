@@ -8,7 +8,15 @@ public class MathEvaluator {
   public double calcFromInfix(String infix) {
     ArrayList<String> infixArrayList = infixStringToArrayList(infix);
     ArrayList<String> postfixStack = infixToPostfixArrayList(infixArrayList);
-    return calcFromPostfix(postfixStack);
+    return rpnCalculator(postfixStack);
+  }
+
+  double rpnCalculator(ArrayList<String> postfixArrayList) {
+    double result = 0;
+    for(String token : postfixArrayList) {
+      
+    }
+    return result;
   }
 
   /**
@@ -77,10 +85,6 @@ public class MathEvaluator {
       }
     }
     return infixArrayList;
-  }
-
-  private double calcFromPostfix(ArrayList<String> postfixStack) {
-    return 0;
   }
 
 }
