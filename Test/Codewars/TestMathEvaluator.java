@@ -611,7 +611,6 @@ public class TestMathEvaluator {
     parenPostfix4.add("+");
     parenPostfix4.add("-");
     assertEquals(parenPostfix4, math.infixToPostfixArrayList(parenInfix4));
-
   }
 
   @Test
@@ -758,6 +757,21 @@ public class TestMathEvaluator {
     afterCleanBasic2.add("-4");
     afterCleanBasic2.add("*");
     assertEquals(afterCleanBasic2, math.realignPostfixOps(beforeCleanBasic2));
+
+    ArrayList<String> beforeCleanBasic3 = new ArrayList<>();
+    beforeCleanBasic3.add("8");
+    beforeCleanBasic3.add("*");
+    beforeCleanBasic3.add("12");
+    beforeCleanBasic3.add("/");
+    beforeCleanBasic3.add("4");
+    beforeCleanBasic3.add("-");
+    ArrayList<String> afterCleanBasic3 = new ArrayList<>();
+    afterCleanBasic3.add("8");
+    afterCleanBasic3.add("12");
+    afterCleanBasic3.add("*");
+    afterCleanBasic3.add("-4");
+    afterCleanBasic3.add("/");
+    assertEquals(afterCleanBasic3, math.realignPostfixOps(beforeCleanBasic3));
   }
 
   @Test
