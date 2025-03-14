@@ -56,46 +56,51 @@ public class MathEvaluator {
     for(int i = 0; i < postfixOps.size(); i++) {
       String token = postfixOps.get(i);
       cleanResult.add(token);
-      if ("*/+-".contains(token)) {
-        opCount++;
-        if(opCount == numCount) {
-          if(token.equals("-")) {
-            cleanResult = negateNumberAtIndex(indexOfLastNumber, cleanResult);
-            opCount--;
-          } else if(mustSwapAfterNextToken) {
-            cleanResult = swapLastTwo(cleanResult);
-            mustSwapAfterNextToken = false;
-          } else {
-            mustSwapAfterNextToken = true;
-          }
-        }
-      } else {
-        numCount++;
-        indexOfLastNumber = i;
+      if(mustSwapAfterNextToken) {
+        cleanResult = swapLastTwo(cleanResult);
       }
+      if ("*/+-".contains(token)) {
+          opCount++;
+          if(opCount == numCount) {
+            if(token.equals("-")) {
+              cleanResult = negateNumberAtIndex(indexOfLastNumber, cleanResult);
+              opCount--;
+            } else {
+              mustSwapAfterNextToken = true;
+            }
+          }
+        } else {
+          numCount++;
+          indexOfLastNumber = mustSwapAfterNextToken ? i - 1 : i;
+          mustSwapAfterNextToken = false;
+        }
     }
     return cleanResult;
   }
 
   ArrayList<String> swapLastTwo(ArrayList<String> brokenPostfix) {
     ArrayList<String> cleanPostfix = brokenPostfix;
-    String last = brokenPostfix.get(brokenPostfix.size() - 2);
-    String penultimate = brokenPostfix.get(brokenPostfix.size() - 1);
-    cleanPostfix.add(brokenPostfix.size() - 1, penultimate);
-    cleanPostfix.add(brokenPostfix.size() - 1, last);
-    cleanPostfix.remove(cleanPostfix.size() - 3);
-    cleanPostfix.remove(cleanPostfix.size() - 3);
+    String operator = brokenPostfix.get(brokenPostfix.size() - 2);
+    String operand = brokenPostfix.get(brokenPostfix.size() - 1);
+    cleanPostfix.remove(cleanPostfix.size() - 1);
+    cleanPostfix.remove(cleanPostfix.size() - 1);
+    cleanPostfix.add(cleanPostfix.size(), operand);
+    cleanPostfix.add(cleanPostfix.size(), operator);
     return cleanPostfix;
   }
 
   ArrayList<String> negateNumberAtIndex(int indexOfNumToNegate, ArrayList<String> postfixOps) {
     ArrayList<String> result = new ArrayList<>();
+    boolean ignoreNextMinus = false;
     for(int i = 0; i < postfixOps.size(); i++) {
       String token = postfixOps.get(i);
-      if(i != indexOfNumToNegate && i != indexOfNumToNegate + 1 || token.equals("0")) {
-        result.add(token);
-      } else if(i == indexOfNumToNegate) {
+      if(ignoreNextMinus && token.equals("-")) {
+        ignoreNextMinus = false;
+      } else if(i != indexOfNumToNegate || token.equals("0")) {
+          result.add(token);
+      } else {
         result.add("-" + token);
+        ignoreNextMinus = true;
       }
     }
     return result;

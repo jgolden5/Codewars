@@ -747,6 +747,17 @@ public class TestMathEvaluator {
     afterCleanBasic1.add("4");
     afterCleanBasic1.add("/");
     assertEquals(afterCleanBasic1, math.realignPostfixOps(beforeCleanBasic1));
+
+    ArrayList<String> beforeCleanBasic2 = new ArrayList<>();
+    beforeCleanBasic2.add("8");
+    beforeCleanBasic2.add("*");
+    beforeCleanBasic2.add("4");
+    beforeCleanBasic2.add("-");
+    ArrayList<String> afterCleanBasic2 = new ArrayList<>();
+    afterCleanBasic2.add("8");
+    afterCleanBasic2.add("-4");
+    afterCleanBasic2.add("*");
+    assertEquals(afterCleanBasic2, math.realignPostfixOps(beforeCleanBasic2));
   }
 
   @Test
