@@ -8,10 +8,7 @@ public class MathEvaluator {
   public double calculate(String infix) {
     ArrayList<String> infixArrayList = infixStringToArrayList(infix);
     ArrayList<String> postfixArrayList = infixToPostfixArrayList(infixArrayList);
-    ArrayList<String> cleanPostfixArrayList = postfixArrayList;
-    while(!postfixOpsAreValid(cleanPostfixArrayList)) {
-      cleanPostfixArrayList = realignPostfixOps(postfixArrayList);
-    }
+    ArrayList<String> cleanPostfixArrayList = realignPostfixOps(postfixArrayList);
     return rpnCalculator(cleanPostfixArrayList);
   }
 
@@ -49,8 +46,43 @@ public class MathEvaluator {
     return operandStack.pop();
   }
 
-  ArrayList<String> realignPostfixOps(ArrayList<String> postfixArrayList) {
-    return null;
+  ArrayList<String> realignPostfixOps(ArrayList<String> postfixOps) {
+    ArrayList<String> cleanPostfixOps = postfixOps;
+    int numCount = 0;
+    int opCount = 0;
+    /*
+    while(!postfixOpsAreValid(postfixOps)) {
+      for(int i = 0; i < postfixOps.size(); i++) {
+        String token = postfixOps.get(i);
+        if ("*\/+-".contains(token)) {
+          opCount++;
+          if(opCount == numCount) {
+            if(token.equals("-")) {
+              cleanPostfixOps = negateFirstNumberBeforeIndex(i, cleanPostfixOps);
+            } else {
+              cleanPostfixOps = infixToPostfixArrayList(cleanPostfixOps);
+            }
+          }
+        } else {
+          numCount++;
+        }
+      }
+    }
+    */
+    return cleanPostfixOps;
+  }
+
+  ArrayList<String> negateFirstNumberBeforeIndex(int indexOfNumToNegate, ArrayList<String> postfixOps) {
+    ArrayList<String> result = new ArrayList<>();
+    for(int i = 0; i < postfixOps.size(); i++) {
+      String token = postfixOps.get(i);
+      if(i == indexOfNumToNegate) {
+        result.add("-" + token);
+      } else if(i != indexOfNumToNegate + 1) {
+        result.add(token);
+      }
+    }
+    return result;
   }
 
   public boolean postfixOpsAreValid(ArrayList<String> postfixOps) {

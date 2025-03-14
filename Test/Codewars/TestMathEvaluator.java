@@ -620,14 +620,17 @@ public class TestMathEvaluator {
     postfixOps1.add("9");
     postfixOps1.add("-");
     assertFalse(math.postfixOpsAreValid(postfixOps1));
+
     ArrayList<String> postfixOps2 = new ArrayList<>();
     postfixOps2.add("9");
     postfixOps2.add("3");
     postfixOps2.add("-");
     assertTrue(math.postfixOpsAreValid(postfixOps2));
+
     ArrayList<String> postfixOps3 = new ArrayList<>();
     postfixOps3.add("-4");
     assertTrue(math.postfixOpsAreValid(postfixOps3));
+
     ArrayList<String> postfixOps4 = new ArrayList<>();
     postfixOps4.add("9");
     postfixOps4.add("10");
@@ -637,6 +640,7 @@ public class TestMathEvaluator {
     postfixOps4.add("6");
     postfixOps4.add("/");
     assertTrue(math.postfixOpsAreValid(postfixOps4));
+
     ArrayList<String> postfixOps5 = new ArrayList<>();
     postfixOps5.add("90");
     postfixOps5.add("10");
@@ -647,6 +651,7 @@ public class TestMathEvaluator {
     postfixOps5.add("6");
     postfixOps5.add("-");
     assertFalse(math.postfixOpsAreValid(postfixOps5));
+
     ArrayList<String> postfixOps6 = new ArrayList<>();
     postfixOps6.add("1000");
     postfixOps6.add("/");
@@ -657,6 +662,7 @@ public class TestMathEvaluator {
     postfixOps6.add("1");
     postfixOps6.add("-");
     assertFalse(math.postfixOpsAreValid(postfixOps6));
+
     ArrayList<String> postfixOps7 = new ArrayList<>();
     postfixOps7.add("1000");
     postfixOps7.add("4");
@@ -666,6 +672,76 @@ public class TestMathEvaluator {
     postfixOps7.add("1");
     postfixOps7.add("-");
     assertTrue(math.postfixOpsAreValid(postfixOps7));
+  }
+
+  @Test
+  public void negateFirstNumberBeforeIndex() {
+    ArrayList<String> before1 = new ArrayList<>();
+    before1.add("2");
+    before1.add("-");
+    before1.add("8");
+    before1.add("+");
+    ArrayList<String> after1 = new ArrayList<>();
+    after1.add("-2");
+    after1.add("8");
+    after1.add("+");
+    assertEquals(after1, math.negateFirstNumberBeforeIndex(0, before1));
+
+    ArrayList<String> before2 = new ArrayList<>();
+    before2.add("9");
+    before2.add("-");
+    before2.add("8");
+    before2.add("-");
+    ArrayList<String> after2 = new ArrayList<>();
+    after2.add("-9");
+    after2.add("8");
+    after2.add("-");
+    assertEquals(after2, math.negateFirstNumberBeforeIndex(0, before2));
+
+    ArrayList<String> before3 = new ArrayList<>();
+    before3.add("10");
+    before3.add("5");
+    before3.add("-");
+    before3.add("3");
+    before3.add("-");
+    ArrayList<String> after3 = new ArrayList<>();
+    after3.add("10");
+    after3.add("5");
+    after3.add("-");
+    after3.add("-3");
+    assertEquals(after3, math.negateFirstNumberBeforeIndex(3, before3));
+
+    ArrayList<String> before4 = new ArrayList<>();
+    before4.add("10");
+    before4.add("5");
+    before4.add("-");
+    before4.add("4");
+    before4.add("-");
+    before4.add("7");
+    before4.add("2");
+    before4.add("-");
+    before4.add("-");
+    before4.add("-");
+    ArrayList<String> after4 = new ArrayList<>();
+    after4.add("10");
+    after4.add("5");
+    after4.add("-");
+    after4.add("-4");
+    after4.add("7");
+    after4.add("2");
+    after4.add("-");
+    after4.add("-");
+    after4.add("-");
+    assertEquals(after4, math.negateFirstNumberBeforeIndex(3, before4));
+  }
+
+  @Test
+  public void realignPostfixOps() {
+    ArrayList<String> beforeCleanBasic1 = new ArrayList<>();
+    beforeCleanBasic1.add("9");
+    beforeCleanBasic1.add("-");
+    beforeCleanBasic1.add("3");
+    beforeCleanBasic1.add("*");
   }
 
   @Test
