@@ -8,7 +8,7 @@ public class MathEvaluator {
   public double calculate(String infix) {
     ArrayList<String> infixArrayList = infixStringToArrayList(infix);
     ArrayList<String> postfixArrayList = infixToPostfixArrayList(infixArrayList);
-    ArrayList<String> cleanPostfixArrayList = cleanPostfixArrayOneSegmentAtATime(infixArrayList);
+    ArrayList<String> cleanPostfixArrayList = cleanPostfixArrayOneSegmentAtATime(postfixArrayList);
     return rpnCalculator(cleanPostfixArrayList);
   }
 
@@ -49,11 +49,18 @@ public class MathEvaluator {
   ArrayList<String> cleanPostfixArrayOneSegmentAtATime(ArrayList<String> postfixArrayList) {
     ArrayList<String> cleanPostfixArrayList = new ArrayList<>();
     ArrayList<String> currentSegment = new ArrayList<>();
-    for(int i = 0; i < postfixArrayList.size(); i++) {
-      boolean currentSegmentIsComplete = false;
-      if(currentSegmentIsComplete) {
-        cleanPostfixArrayList.addAll(removeExtraMinusesFromSegment(currentSegment));
+    for (String token : postfixArrayList) {
+      boolean currentSegmentIsComplete = currentSegment.size() == 3 || currentSegment.size() == 2 && currentSegment.get(1).equals("-");
+      if (currentSegmentIsComplete) {
+        ArrayList<String> cleanSegment = removeExtraMinusesFromSegment(currentSegment);
+        cleanPostfixArrayList.addAll(cleanSegment);
+      } else {
+        currentSegment.add(token);
       }
+    }
+    if(!currentSegment.isEmpty()) {
+      ArrayList<String> cleanSegment = removeExtraMinusesFromSegment(currentSegment);
+      cleanPostfixArrayList.addAll(cleanSegment);
     }
     return cleanPostfixArrayList;
   }

@@ -678,6 +678,26 @@ public class TestMathEvaluator {
   }
 
   @Test
+  public void cleanPostfixArrayOneSegmentAtATime() {
+    ArrayList<String> extraSmall1 = new ArrayList<>();
+    extraSmall1.add("8");
+    extraSmall1.add("-");
+    ArrayList<String> cleanSmall1 = new ArrayList<>();
+    cleanSmall1.add("-8");
+    assertEquals(cleanSmall1, math.cleanPostfixArrayOneSegmentAtATime(extraSmall1));
+
+    ArrayList<String> extraSmall2 = new ArrayList<>();
+    extraSmall2.add("6");
+    extraSmall2.add("+");
+    extraSmall2.add("7");
+    ArrayList<String> cleanSmall2 = new ArrayList<>();
+    cleanSmall2.add("6");
+    cleanSmall2.add("7");
+    cleanSmall2.add("+");
+    assertEquals(cleanSmall2, math.cleanPostfixArrayOneSegmentAtATime(extraSmall2));
+  }
+
+  @Test
   public void rpnCalculator() {
     ArrayList<String> simple1 = new ArrayList<>();
     simple1.add("2");
