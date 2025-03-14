@@ -695,6 +695,30 @@ public class TestMathEvaluator {
     cleanSmall2.add("7");
     cleanSmall2.add("+");
     assertEquals(cleanSmall2, math.cleanPostfixArrayOneSegmentAtATime(extraSmall2));
+
+    ArrayList<String> extraSmall3 = new ArrayList<>();
+    extraSmall3.add("3.0");
+    extraSmall3.add("-");
+    ArrayList<String> cleanSmall3 = new ArrayList<>();
+    cleanSmall3.add("-3.0");
+    assertEquals(cleanSmall3, math.cleanPostfixArrayOneSegmentAtATime(extraSmall3));
+
+    ArrayList<String> extraSmall4 = new ArrayList<>();
+    extraSmall4.add("9");
+    extraSmall4.add("/");
+    extraSmall4.add("3");
+    ArrayList<String> cleanSmall4 = new ArrayList<>();
+    cleanSmall4.add("9");
+    cleanSmall4.add("3");
+    cleanSmall4.add("/");
+    assertEquals(cleanSmall4, math.cleanPostfixArrayOneSegmentAtATime(extraSmall4));
+
+    ArrayList<String> extraSmall5 = new ArrayList<>();
+    extraSmall5.add("-12");
+    extraSmall5.add("-");
+    ArrayList<String> cleanSmall5 = new ArrayList<>();
+    cleanSmall5.add("12");
+    assertEquals(cleanSmall5, math.cleanPostfixArrayOneSegmentAtATime(extraSmall5));
   }
 
   @Test
