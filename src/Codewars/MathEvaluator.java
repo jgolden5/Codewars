@@ -8,7 +8,10 @@ public class MathEvaluator {
   public double calculate(String infix) {
     ArrayList<String> infixArrayList = infixStringToArrayList(infix);
     ArrayList<String> postfixArrayList = infixToPostfixArrayList(infixArrayList);
-    ArrayList<String> cleanPostfixArrayList = realignPostfixOps(postfixArrayList);
+    ArrayList<String> cleanPostfixArrayList = postfixArrayList;
+    while(!postfixOpsAreValid(cleanPostfixArrayList)) {
+      cleanPostfixArrayList = realignPostfixOps(postfixArrayList);
+    }
     return rpnCalculator(cleanPostfixArrayList);
   }
 
@@ -48,6 +51,19 @@ public class MathEvaluator {
 
   ArrayList<String> realignPostfixOps(ArrayList<String> postfixArrayList) {
     return null;
+  }
+
+  public boolean postfixOpsAreValid(ArrayList<String> postfixOps) {
+    int numCount = 0;
+    int opCount = 0;
+    for(String token : postfixOps) {
+      if("*/+-".contains(token)) {
+        opCount++;
+      } else {
+        numCount++;
+      }
+    }
+    return numCount == opCount + 1;
   }
 
   /**

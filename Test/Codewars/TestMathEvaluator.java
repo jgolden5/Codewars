@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestMathEvaluator {
 
@@ -616,120 +615,57 @@ public class TestMathEvaluator {
   }
 
   @Test
-  public void rearrangeTokensInSegment() {
-    ArrayList<String> extraMinus1 = new ArrayList<>();
-    extraMinus1.add("9");
-    extraMinus1.add("-");
-    ArrayList<String> cleanMinus1 = new ArrayList<>();
-    cleanMinus1.add("-9");
-    assertEquals(cleanMinus1, math.rearrangeTokensInSegment(extraMinus1));
-    ArrayList<String> extraMinus2 = new ArrayList<>();
-    extraMinus2.add("9.0");
-    extraMinus2.add("-");
-    ArrayList<String> cleanMinus2 = new ArrayList<>();
-    cleanMinus2.add("-9.0");
-    assertEquals(cleanMinus2, math.rearrangeTokensInSegment(extraMinus2));
-    ArrayList<String> extraMinus3 = new ArrayList<>();
-    extraMinus3.add("-9");
-    extraMinus3.add("-");
-    ArrayList<String> cleanMinus3 = new ArrayList<>();
-    cleanMinus3.add("9");
-    assertEquals(cleanMinus3, math.rearrangeTokensInSegment(extraMinus3));
-
-    ArrayList<String> extraOtherOps1 = new ArrayList<>();
-    extraOtherOps1.add("6");
-    extraOtherOps1.add("+");
-    extraOtherOps1.add("2");
-    ArrayList<String> cleanOtherOps1 = new ArrayList<>();
-    cleanOtherOps1.add("6");
-    cleanOtherOps1.add("2");
-    cleanOtherOps1.add("+");
-    assertEquals(cleanOtherOps1, math.rearrangeTokensInSegment(extraOtherOps1));
-
-    ArrayList<String> extraOtherOps2 = new ArrayList<>();
-    extraOtherOps2.add("9");
-    extraOtherOps2.add("+");
-    extraOtherOps2.add("3");
-    ArrayList<String> cleanOtherOps2 = new ArrayList<>();
-    cleanOtherOps2.add("9");
-    cleanOtherOps2.add("3");
-    cleanOtherOps2.add("+");
-    assertEquals(cleanOtherOps2, math.rearrangeTokensInSegment(extraOtherOps2));
-
-    ArrayList<String> extraOtherOps3 = new ArrayList<>();
-    extraOtherOps3.add("6");
-    extraOtherOps3.add("/");
-    extraOtherOps3.add("2");
-    ArrayList<String> cleanOtherOps3 = new ArrayList<>();
-    cleanOtherOps3.add("6");
-    cleanOtherOps3.add("2");
-    cleanOtherOps3.add("/");
-    assertEquals(cleanOtherOps3, math.rearrangeTokensInSegment(extraOtherOps3));
-
-    ArrayList<String> extraOtherOps4 = new ArrayList<>();
-    extraOtherOps4.add("9");
-    extraOtherOps4.add("*");
-    extraOtherOps4.add("2");
-    ArrayList<String> cleanOtherOps4 = new ArrayList<>();
-    cleanOtherOps4.add("9");
-    cleanOtherOps4.add("2");
-    cleanOtherOps4.add("*");
-    assertEquals(cleanOtherOps4, math.rearrangeTokensInSegment(extraOtherOps4));
-  }
-
-  @Test
-  public void cleanPostfixArrayOneSegmentAtATime() {
-    ArrayList<String> extraSmall1 = new ArrayList<>();
-    extraSmall1.add("8");
-    extraSmall1.add("-");
-    ArrayList<String> cleanSmall1 = new ArrayList<>();
-    cleanSmall1.add("-8");
-    assertEquals(cleanSmall1, math.cleanPostfixArrayOneSegmentAtATime(extraSmall1));
-
-    ArrayList<String> extraSmall2 = new ArrayList<>();
-    extraSmall2.add("6");
-    extraSmall2.add("+");
-    extraSmall2.add("7");
-    ArrayList<String> cleanSmall2 = new ArrayList<>();
-    cleanSmall2.add("6");
-    cleanSmall2.add("7");
-    cleanSmall2.add("+");
-    assertEquals(cleanSmall2, math.cleanPostfixArrayOneSegmentAtATime(extraSmall2));
-
-    ArrayList<String> extraSmall3 = new ArrayList<>();
-    extraSmall3.add("3.0");
-    extraSmall3.add("-");
-    ArrayList<String> cleanSmall3 = new ArrayList<>();
-    cleanSmall3.add("-3.0");
-    assertEquals(cleanSmall3, math.cleanPostfixArrayOneSegmentAtATime(extraSmall3));
-
-    ArrayList<String> extraSmall4 = new ArrayList<>();
-    extraSmall4.add("9");
-    extraSmall4.add("/");
-    extraSmall4.add("3");
-    ArrayList<String> cleanSmall4 = new ArrayList<>();
-    cleanSmall4.add("9");
-    cleanSmall4.add("3");
-    cleanSmall4.add("/");
-    assertEquals(cleanSmall4, math.cleanPostfixArrayOneSegmentAtATime(extraSmall4));
-
-    ArrayList<String> extraSmall5 = new ArrayList<>();
-    extraSmall5.add("-12");
-    extraSmall5.add("-");
-    ArrayList<String> cleanSmall5 = new ArrayList<>();
-    cleanSmall5.add("12");
-    assertEquals(cleanSmall5, math.cleanPostfixArrayOneSegmentAtATime(extraSmall5));
-
-    ArrayList<String> extraMedium1 = new ArrayList<>();
-    extraMedium1.add("12");
-    extraMedium1.add("-");
-    extraMedium1.add("6");
-    extraMedium1.add("-");
-    ArrayList<String> cleanMedium1 = new ArrayList<>();
-    extraMedium1.add("-12");
-    extraMedium1.add("6");
-    extraMedium1.add("-");
-    assertEquals(cleanMedium1, math.cleanPostfixArrayOneSegmentAtATime(extraMedium1));
+  public void postfixOpsAreValid() {
+    ArrayList<String> postfixOps1 = new ArrayList<>();
+    postfixOps1.add("9");
+    postfixOps1.add("-");
+    assertFalse(math.postfixOpsAreValid(postfixOps1));
+    ArrayList<String> postfixOps2 = new ArrayList<>();
+    postfixOps2.add("9");
+    postfixOps2.add("3");
+    postfixOps2.add("-");
+    assertTrue(math.postfixOpsAreValid(postfixOps2));
+    ArrayList<String> postfixOps3 = new ArrayList<>();
+    postfixOps3.add("-4");
+    assertTrue(math.postfixOpsAreValid(postfixOps3));
+    ArrayList<String> postfixOps4 = new ArrayList<>();
+    postfixOps4.add("9");
+    postfixOps4.add("10");
+    postfixOps4.add("+");
+    postfixOps4.add("14");
+    postfixOps4.add("-");
+    postfixOps4.add("6");
+    postfixOps4.add("/");
+    assertTrue(math.postfixOpsAreValid(postfixOps4));
+    ArrayList<String> postfixOps5 = new ArrayList<>();
+    postfixOps5.add("90");
+    postfixOps5.add("10");
+    postfixOps5.add("+");
+    postfixOps5.add("15");
+    postfixOps5.add("-");
+    postfixOps5.add("+");
+    postfixOps5.add("6");
+    postfixOps5.add("-");
+    assertFalse(math.postfixOpsAreValid(postfixOps5));
+    ArrayList<String> postfixOps6 = new ArrayList<>();
+    postfixOps6.add("1000");
+    postfixOps6.add("/");
+    postfixOps6.add("4");
+    postfixOps6.add("-");
+    postfixOps6.add("62");
+    postfixOps6.add("+");
+    postfixOps6.add("1");
+    postfixOps6.add("-");
+    assertFalse(math.postfixOpsAreValid(postfixOps6));
+    ArrayList<String> postfixOps7 = new ArrayList<>();
+    postfixOps7.add("1000");
+    postfixOps7.add("4");
+    postfixOps7.add("/");
+    postfixOps7.add("72");
+    postfixOps7.add("+");
+    postfixOps7.add("1");
+    postfixOps7.add("-");
+    assertTrue(math.postfixOpsAreValid(postfixOps7));
   }
 
   @Test
