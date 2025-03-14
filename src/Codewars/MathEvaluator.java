@@ -8,7 +8,7 @@ public class MathEvaluator {
   public double calculate(String infix) {
     ArrayList<String> infixArrayList = infixStringToArrayList(infix);
     ArrayList<String> postfixArrayList = infixToPostfixArrayList(infixArrayList);
-    ArrayList<String> cleanPostfixArrayList = cleanPostfixArrayOneSegmentAtATime(postfixArrayList);
+    ArrayList<String> cleanPostfixArrayList = realignPostfixOps(postfixArrayList);
     return rpnCalculator(cleanPostfixArrayList);
   }
 
@@ -46,37 +46,8 @@ public class MathEvaluator {
     return operandStack.pop();
   }
 
-  ArrayList<String> cleanPostfixArrayOneSegmentAtATime(ArrayList<String> postfixArrayList) {
-    ArrayList<String> cleanPostfixArrayList = new ArrayList<>();
-    ArrayList<String> currentSegment = new ArrayList<>();
-    for (String token : postfixArrayList) {
-      boolean currentSegmentIsComplete = currentSegment.size() == 3 || currentSegment.size() == 2 && currentSegment.get(1).equals("-");
-      if (currentSegmentIsComplete) {
-        ArrayList<String> cleanSegment = removeExtraMinusesFromSegment(currentSegment);
-        cleanPostfixArrayList.addAll(cleanSegment);
-      } else {
-        currentSegment.add(token);
-      }
-    }
-    if(!currentSegment.isEmpty()) {
-      ArrayList<String> cleanSegment = removeExtraMinusesFromSegment(currentSegment);
-      cleanPostfixArrayList.addAll(cleanSegment);
-    }
-    return cleanPostfixArrayList;
-  }
-
-  ArrayList<String> removeExtraMinusesFromSegment(ArrayList<String> postfixSegment) {
-    ArrayList<String> cleanPostfixSegment = new ArrayList<>();
-    if(postfixSegment.get(1).equals("-")) {
-      String firstInSegment = postfixSegment.get(0);
-      String cleanFirst = firstInSegment.charAt(0) == '-' ? firstInSegment.substring(1) : "-" + firstInSegment;
-      cleanPostfixSegment.add(cleanFirst);
-    } else if("*/+".contains(postfixSegment.get(1))) {
-      cleanPostfixSegment.add(postfixSegment.get(0));
-      cleanPostfixSegment.add(postfixSegment.get(2));
-      cleanPostfixSegment.add(postfixSegment.get(1));
-    }
-    return cleanPostfixSegment;
+  ArrayList<String> realignPostfixOps(ArrayList<String> postfixArrayList) {
+    return null;
   }
 
   /**

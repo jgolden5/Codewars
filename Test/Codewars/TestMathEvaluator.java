@@ -616,25 +616,25 @@ public class TestMathEvaluator {
   }
 
   @Test
-  public void removeExtraMinusesFromSegment() {
+  public void rearrangeTokensInSegment() {
     ArrayList<String> extraMinus1 = new ArrayList<>();
     extraMinus1.add("9");
     extraMinus1.add("-");
     ArrayList<String> cleanMinus1 = new ArrayList<>();
     cleanMinus1.add("-9");
-    assertEquals(cleanMinus1, math.removeExtraMinusesFromSegment(extraMinus1));
+    assertEquals(cleanMinus1, math.rearrangeTokensInSegment(extraMinus1));
     ArrayList<String> extraMinus2 = new ArrayList<>();
     extraMinus2.add("9.0");
     extraMinus2.add("-");
     ArrayList<String> cleanMinus2 = new ArrayList<>();
     cleanMinus2.add("-9.0");
-    assertEquals(cleanMinus2, math.removeExtraMinusesFromSegment(extraMinus2));
+    assertEquals(cleanMinus2, math.rearrangeTokensInSegment(extraMinus2));
     ArrayList<String> extraMinus3 = new ArrayList<>();
     extraMinus3.add("-9");
     extraMinus3.add("-");
     ArrayList<String> cleanMinus3 = new ArrayList<>();
     cleanMinus3.add("9");
-    assertEquals(cleanMinus3, math.removeExtraMinusesFromSegment(extraMinus3));
+    assertEquals(cleanMinus3, math.rearrangeTokensInSegment(extraMinus3));
 
     ArrayList<String> extraOtherOps1 = new ArrayList<>();
     extraOtherOps1.add("6");
@@ -644,7 +644,7 @@ public class TestMathEvaluator {
     cleanOtherOps1.add("6");
     cleanOtherOps1.add("2");
     cleanOtherOps1.add("+");
-    assertEquals(cleanOtherOps1, math.removeExtraMinusesFromSegment(extraOtherOps1));
+    assertEquals(cleanOtherOps1, math.rearrangeTokensInSegment(extraOtherOps1));
 
     ArrayList<String> extraOtherOps2 = new ArrayList<>();
     extraOtherOps2.add("9");
@@ -654,7 +654,7 @@ public class TestMathEvaluator {
     cleanOtherOps2.add("9");
     cleanOtherOps2.add("3");
     cleanOtherOps2.add("+");
-    assertEquals(cleanOtherOps2, math.removeExtraMinusesFromSegment(extraOtherOps2));
+    assertEquals(cleanOtherOps2, math.rearrangeTokensInSegment(extraOtherOps2));
 
     ArrayList<String> extraOtherOps3 = new ArrayList<>();
     extraOtherOps3.add("6");
@@ -664,7 +664,7 @@ public class TestMathEvaluator {
     cleanOtherOps3.add("6");
     cleanOtherOps3.add("2");
     cleanOtherOps3.add("/");
-    assertEquals(cleanOtherOps3, math.removeExtraMinusesFromSegment(extraOtherOps3));
+    assertEquals(cleanOtherOps3, math.rearrangeTokensInSegment(extraOtherOps3));
 
     ArrayList<String> extraOtherOps4 = new ArrayList<>();
     extraOtherOps4.add("9");
@@ -674,7 +674,7 @@ public class TestMathEvaluator {
     cleanOtherOps4.add("9");
     cleanOtherOps4.add("2");
     cleanOtherOps4.add("*");
-    assertEquals(cleanOtherOps4, math.removeExtraMinusesFromSegment(extraOtherOps4));
+    assertEquals(cleanOtherOps4, math.rearrangeTokensInSegment(extraOtherOps4));
   }
 
   @Test
@@ -719,6 +719,17 @@ public class TestMathEvaluator {
     ArrayList<String> cleanSmall5 = new ArrayList<>();
     cleanSmall5.add("12");
     assertEquals(cleanSmall5, math.cleanPostfixArrayOneSegmentAtATime(extraSmall5));
+
+    ArrayList<String> extraMedium1 = new ArrayList<>();
+    extraMedium1.add("12");
+    extraMedium1.add("-");
+    extraMedium1.add("6");
+    extraMedium1.add("-");
+    ArrayList<String> cleanMedium1 = new ArrayList<>();
+    extraMedium1.add("-12");
+    extraMedium1.add("6");
+    extraMedium1.add("-");
+    assertEquals(cleanMedium1, math.cleanPostfixArrayOneSegmentAtATime(extraMedium1));
   }
 
   @Test
