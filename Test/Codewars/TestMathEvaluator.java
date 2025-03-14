@@ -635,6 +635,46 @@ public class TestMathEvaluator {
     ArrayList<String> cleanMinus3 = new ArrayList<>();
     cleanMinus3.add("9");
     assertEquals(cleanMinus3, math.removeExtraMinusesFromSegment(extraMinus3));
+
+    ArrayList<String> extraOtherOps1 = new ArrayList<>();
+    extraOtherOps1.add("6");
+    extraOtherOps1.add("+");
+    extraOtherOps1.add("2");
+    ArrayList<String> cleanOtherOps1 = new ArrayList<>();
+    cleanOtherOps1.add("6");
+    cleanOtherOps1.add("2");
+    cleanOtherOps1.add("+");
+    assertEquals(cleanOtherOps1, math.removeExtraMinusesFromSegment(extraOtherOps1));
+
+    ArrayList<String> extraOtherOps2 = new ArrayList<>();
+    extraOtherOps2.add("9");
+    extraOtherOps2.add("+");
+    extraOtherOps2.add("3");
+    ArrayList<String> cleanOtherOps2 = new ArrayList<>();
+    cleanOtherOps2.add("9");
+    cleanOtherOps2.add("3");
+    cleanOtherOps2.add("+");
+    assertEquals(cleanOtherOps2, math.removeExtraMinusesFromSegment(extraOtherOps2));
+
+    ArrayList<String> extraOtherOps3 = new ArrayList<>();
+    extraOtherOps3.add("6");
+    extraOtherOps3.add("/");
+    extraOtherOps3.add("2");
+    ArrayList<String> cleanOtherOps3 = new ArrayList<>();
+    cleanOtherOps3.add("6");
+    cleanOtherOps3.add("2");
+    cleanOtherOps3.add("/");
+    assertEquals(cleanOtherOps3, math.removeExtraMinusesFromSegment(extraOtherOps3));
+
+    ArrayList<String> extraOtherOps4 = new ArrayList<>();
+    extraOtherOps4.add("9");
+    extraOtherOps4.add("*");
+    extraOtherOps4.add("2");
+    ArrayList<String> cleanOtherOps4 = new ArrayList<>();
+    cleanOtherOps4.add("9");
+    cleanOtherOps4.add("2");
+    cleanOtherOps4.add("*");
+    assertEquals(cleanOtherOps4, math.removeExtraMinusesFromSegment(extraOtherOps4));
   }
 
   @Test
