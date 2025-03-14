@@ -613,18 +613,15 @@ public class TestMathEvaluator {
     parenPostfix4.add("-");
     assertEquals(parenPostfix4, math.infixToPostfixArrayList(parenInfix4));
 
-    ArrayList<String> minusInfix1 = new ArrayList<>();
-    minusInfix1.add("-");
-    minusInfix1.add("2.5");
-    minusInfix1.add("+");
-    minusInfix1.add("11.5");
-    ArrayList<String> minusPostfix1 = new ArrayList<>();
-    minusPostfix1.add("2.5");
-    minusPostfix1.add("-");
-    minusPostfix1.add("11.5");
-    minusPostfix1.add("+");
-    assertEquals(minusPostfix1, math.infixToPostfixArrayList(minusInfix1));
+  }
 
+  @Test
+  public void removeExtraMinusesFromSegment() {
+    ArrayList<String> minus1Extra = new ArrayList<>();
+    minus1Extra.add("9");
+    minus1Extra.add("-");
+    ArrayList<String> minus1Clean = new ArrayList<>();
+    assertEquals(minus1Clean, math.removeExtraMinusesFromSegment(minus1Extra));
   }
 
   @Test

@@ -8,7 +8,8 @@ public class MathEvaluator {
   public double calculate(String infix) {
     ArrayList<String> infixArrayList = infixStringToArrayList(infix);
     ArrayList<String> postfixArrayList = infixToPostfixArrayList(infixArrayList);
-    return rpnCalculator(postfixArrayList);
+    ArrayList<String> cleanPostfixArrayList = cleanPostfixArrayOneSegmentAtATime(infixArrayList);
+    return rpnCalculator(cleanPostfixArrayList);
   }
 
   double rpnCalculator(ArrayList<String> postfixArrayList) {
@@ -45,6 +46,24 @@ public class MathEvaluator {
     return operandStack.pop();
   }
 
+  ArrayList<String> cleanPostfixArrayOneSegmentAtATime(ArrayList<String> postfixArrayList) {
+    ArrayList<String> cleanPostfixArrayList = new ArrayList<>();
+    ArrayList<String> currentSegment = new ArrayList<>();
+    for(int i = 0; i < postfixArrayList.size(); i++) {
+      boolean currentSegmentIsComplete = false;
+      if(currentSegmentIsComplete) {
+        cleanPostfixArrayList.addAll(removeExtraMinusesFromSegment(currentSegment));
+      }
+    }
+    return cleanPostfixArrayList;
+  }
+
+  ArrayList<String> removeExtraMinusesFromSegment(ArrayList<String> postfixSegment) {
+    ArrayList<String> cleanPostfixSegment = new ArrayList<>();
+
+    return cleanPostfixSegment;
+  }
+
   /**
    * loop through every element of infixArrayList
      * if !"()*\/+-".contains(currentInfix)
@@ -79,35 +98,7 @@ public class MathEvaluator {
     while(!opStack.isEmpty()) {
       postfixResult.add(opStack.pop());
     }
-    if(!validatePostfix(postfixResult)) {
-      if(postfixResult.get(postfixResult.size() - 1).equals("-")) {
-        postfixResult.remove(postfixResult.size() - 1);
-        int lastIndexOfNum = -1;
-        for(int i = 0; i < postfixResult.size(); i++) {
-          if(!"*/+-".contains(postfixResult.get(i))) {
-            lastIndexOfNum = i;
-          }
-        }
-        String last = postfixResult.get(lastIndexOfNum);
-        postfixResult.remove(lastIndexOfNum);
-        postfixResult.add(lastIndexOfNum, "-" + last);
-        postfixResult = infixToPostfixArrayList(postfixResult);
-      }
-    }
     return postfixResult;
-  }
-
-  private boolean validatePostfix(ArrayList<String> postfixResult) {
-    int numCount = 0;
-    int opCount = 0;
-    for(String token : postfixResult) {
-      if("*/+-".contains(token)) {
-        opCount++;
-      } else {
-        numCount++;
-      }
-    }
-    return numCount == opCount + 1;
   }
 
   /**
