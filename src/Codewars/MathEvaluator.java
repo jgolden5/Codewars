@@ -60,7 +60,15 @@ public class MathEvaluator {
 
   ArrayList<String> removeExtraMinusesFromSegment(ArrayList<String> postfixSegment) {
     ArrayList<String> cleanPostfixSegment = new ArrayList<>();
-
+    if(postfixSegment.get(1).equals("-")) {
+      String firstInSegment = postfixSegment.get(0);
+      String cleanFirst = firstInSegment.charAt(0) == '-' ? firstInSegment.substring(1) : "-" + firstInSegment;
+      cleanPostfixSegment.add(cleanFirst);
+    } else if("*/+".contains(postfixSegment.get(1))) {
+      cleanPostfixSegment.add(postfixSegment.get(0));
+      cleanPostfixSegment.add(postfixSegment.get(2));
+      cleanPostfixSegment.add(postfixSegment.get(1));
+    }
     return cleanPostfixSegment;
   }
 

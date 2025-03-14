@@ -617,11 +617,24 @@ public class TestMathEvaluator {
 
   @Test
   public void removeExtraMinusesFromSegment() {
-    ArrayList<String> minus1Extra = new ArrayList<>();
-    minus1Extra.add("9");
-    minus1Extra.add("-");
-    ArrayList<String> minus1Clean = new ArrayList<>();
-    assertEquals(minus1Clean, math.removeExtraMinusesFromSegment(minus1Extra));
+    ArrayList<String> extraMinus1 = new ArrayList<>();
+    extraMinus1.add("9");
+    extraMinus1.add("-");
+    ArrayList<String> cleanMinus1 = new ArrayList<>();
+    cleanMinus1.add("-9");
+    assertEquals(cleanMinus1, math.removeExtraMinusesFromSegment(extraMinus1));
+    ArrayList<String> extraMinus2 = new ArrayList<>();
+    extraMinus2.add("9.0");
+    extraMinus2.add("-");
+    ArrayList<String> cleanMinus2 = new ArrayList<>();
+    cleanMinus2.add("-9.0");
+    assertEquals(cleanMinus2, math.removeExtraMinusesFromSegment(extraMinus2));
+    ArrayList<String> extraMinus3 = new ArrayList<>();
+    extraMinus3.add("-9");
+    extraMinus3.add("-");
+    ArrayList<String> cleanMinus3 = new ArrayList<>();
+    cleanMinus3.add("9");
+    assertEquals(cleanMinus3, math.removeExtraMinusesFromSegment(extraMinus3));
   }
 
   @Test
