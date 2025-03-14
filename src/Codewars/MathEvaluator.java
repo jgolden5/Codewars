@@ -47,32 +47,36 @@ public class MathEvaluator {
   }
 
   ArrayList<String> realignPostfixOps(ArrayList<String> postfixOps) {
-    ArrayList<String> cleanPostfixOps = postfixOps;
+    ArrayList<String> cleanResult = new ArrayList<>();
+    ArrayList<String> segmentToClean = postfixOps;
     int numCount = 0;
     int opCount = 0;
-    /*
-    while(!postfixOpsAreValid(postfixOps)) {
+    int indexOfLastNumber = 0;
+    while(!postfixOpsAreValid(segmentToClean)) {
+      segmentToClean = new ArrayList<>();
       for(int i = 0; i < postfixOps.size(); i++) {
         String token = postfixOps.get(i);
-        if ("*\/+-".contains(token)) {
+        segmentToClean.add(token);
+        if ("*/+-".contains(token)) {
           opCount++;
           if(opCount == numCount) {
             if(token.equals("-")) {
-              cleanPostfixOps = negateFirstNumberBeforeIndex(i, cleanPostfixOps);
+              segmentToClean = negateNumberAtIndex(indexOfLastNumber, segmentToClean);
             } else {
-              cleanPostfixOps = infixToPostfixArrayList(cleanPostfixOps);
+              segmentToClean = infixToPostfixArrayList(segmentToClean);
             }
           }
         } else {
           numCount++;
+          indexOfLastNumber = i;
         }
       }
+      cleanResult.addAll(segmentToClean);
     }
-    */
-    return cleanPostfixOps;
+    return cleanResult;
   }
 
-  ArrayList<String> negateFirstNumberBeforeIndex(int indexOfNumToNegate, ArrayList<String> postfixOps) {
+  ArrayList<String> negateNumberAtIndex(int indexOfNumToNegate, ArrayList<String> postfixOps) {
     ArrayList<String> result = new ArrayList<>();
     for(int i = 0; i < postfixOps.size(); i++) {
       String token = postfixOps.get(i);

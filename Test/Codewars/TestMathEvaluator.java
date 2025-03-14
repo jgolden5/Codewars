@@ -675,7 +675,7 @@ public class TestMathEvaluator {
   }
 
   @Test
-  public void negateFirstNumberBeforeIndex() {
+  public void negateNumberAtIndex() {
     ArrayList<String> before1 = new ArrayList<>();
     before1.add("2");
     before1.add("-");
@@ -685,7 +685,7 @@ public class TestMathEvaluator {
     after1.add("-2");
     after1.add("8");
     after1.add("+");
-    assertEquals(after1, math.negateFirstNumberBeforeIndex(0, before1));
+    assertEquals(after1, math.negateNumberAtIndex(0, before1));
 
     ArrayList<String> before2 = new ArrayList<>();
     before2.add("9");
@@ -696,7 +696,7 @@ public class TestMathEvaluator {
     after2.add("-9");
     after2.add("8");
     after2.add("-");
-    assertEquals(after2, math.negateFirstNumberBeforeIndex(0, before2));
+    assertEquals(after2, math.negateNumberAtIndex(0, before2));
 
     ArrayList<String> before3 = new ArrayList<>();
     before3.add("10");
@@ -709,7 +709,7 @@ public class TestMathEvaluator {
     after3.add("5");
     after3.add("-");
     after3.add("-3");
-    assertEquals(after3, math.negateFirstNumberBeforeIndex(3, before3));
+    assertEquals(after3, math.negateNumberAtIndex(3, before3));
 
     ArrayList<String> before4 = new ArrayList<>();
     before4.add("10");
@@ -732,16 +732,21 @@ public class TestMathEvaluator {
     after4.add("-");
     after4.add("-");
     after4.add("-");
-    assertEquals(after4, math.negateFirstNumberBeforeIndex(3, before4));
+    assertEquals(after4, math.negateNumberAtIndex(3, before4));
   }
 
   @Test
   public void realignPostfixOps() {
     ArrayList<String> beforeCleanBasic1 = new ArrayList<>();
-    beforeCleanBasic1.add("9");
+    beforeCleanBasic1.add("8");
     beforeCleanBasic1.add("-");
-    beforeCleanBasic1.add("3");
-    beforeCleanBasic1.add("*");
+    beforeCleanBasic1.add("4");
+    beforeCleanBasic1.add("/");
+    ArrayList<String> afterCleanBasic1 = new ArrayList<>();
+    afterCleanBasic1.add("-8");
+    afterCleanBasic1.add("4");
+    afterCleanBasic1.add("/");
+    assertEquals(afterCleanBasic1, math.realignPostfixOps(beforeCleanBasic1));
   }
 
   @Test
