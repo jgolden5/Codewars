@@ -352,6 +352,31 @@ public class TestMathEvaluator {
     afterSimple1.add("-");
     afterSimple1.add("3");
     assertEquals(afterSimple1, math.fixInfixArrayListMinuses(beforeSimple1));
+
+    ArrayList<String> beforeSimple2 = new ArrayList<>();
+    beforeSimple2.add("-");
+    beforeSimple2.add("6");
+    ArrayList<String> afterSimple2 = new ArrayList<>();
+    afterSimple2.add("-6");
+    assertEquals(afterSimple2, math.fixInfixArrayListMinuses(beforeSimple2));
+
+    ArrayList<String> beforeSimple3 = new ArrayList<>();
+    beforeSimple3.add("-");
+    beforeSimple3.add("-6");
+    ArrayList<String> afterSimple3 = new ArrayList<>();
+    afterSimple3.add("6");
+    assertEquals(afterSimple3, math.fixInfixArrayListMinuses(beforeSimple3));
+
+    ArrayList<String> beforeSimple4 = new ArrayList<>();
+    beforeSimple4.add("6");
+    beforeSimple4.add("-");
+    beforeSimple4.add("-");
+    beforeSimple4.add("4");
+    ArrayList<String> afterSimple4 = new ArrayList<>();
+    afterSimple4.add("6");
+    afterSimple4.add("+");
+    afterSimple4.add("4");
+    assertEquals(afterSimple4, math.fixInfixArrayListMinuses(beforeSimple4));
   }
 
   @Test
