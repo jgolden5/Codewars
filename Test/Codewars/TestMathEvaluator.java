@@ -341,6 +341,20 @@ public class TestMathEvaluator {
   }
 
   @Test
+  public void fixInfixArrayListMinuses() {
+    ArrayList<String> beforeSimple1 = new ArrayList<>();
+    beforeSimple1.add("-");
+    beforeSimple1.add("2");
+    beforeSimple1.add("-");
+    beforeSimple1.add("3");
+    ArrayList<String> afterSimple1 = new ArrayList<>();
+    afterSimple1.add("-2");
+    afterSimple1.add("-");
+    afterSimple1.add("3");
+    assertEquals(afterSimple1, math.fixInfixArrayListMinuses(beforeSimple1));
+  }
+
+  @Test
   public void infixToPostfixArrayList() {
     ArrayList<String> simpleInfix1 = new ArrayList<>();
     simpleInfix1.add("3");
@@ -929,8 +943,8 @@ public class TestMathEvaluator {
     String codewars2 = "36 /(-3 + 15)";
     assertEquals(3, math.calculate(codewars2));
 
-//    String codewars3 = "123/-(-5 + 2)";
-//    assertEquals(41, math.calculate(codewars3));
+    String codewars3 = "123/-(-5 + 2)";
+    assertEquals(41, math.calculate(codewars3));
   }
 
 }

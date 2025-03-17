@@ -7,7 +7,8 @@ public class MathEvaluator {
 
   public double calculate(String infix) {
     ArrayList<String> infixArrayList = infixStringToArrayList(infix);
-    ArrayList<String> postfixArrayList = infixToPostfixArrayList(infixArrayList);
+    ArrayList<String> cleanInfixArrayList = fixInfixArrayListMinuses(infixArrayList);
+    ArrayList<String> postfixArrayList = infixToPostfixArrayList(cleanInfixArrayList);
     ArrayList<String> cleanPostfixArrayList = realignPostfixOps(postfixArrayList);
     return rpnCalculator(cleanPostfixArrayList);
   }
@@ -175,6 +176,36 @@ public class MathEvaluator {
       postfixResult.add(opStack.pop());
     }
     return postfixResult;
+  }
+
+  ArrayList<String> fixInfixArrayListMinuses(ArrayList<String> infixArrayList) {
+    ArrayList<String> cleanInfixArrayList = new ArrayList<>();
+    boolean negateNextNumber = false;
+    for(int i = 0; i < infixArrayList.size(); i++) {
+      String token = infixArrayList.get(i);
+      boolean prevTokenWasNumber = i > 0 && !"*/+-".contains(infixArrayList.get(i - 1));
+      if(token.equals("-")) {
+        if(!prevTokenWasNumber) {
+          negateNextNumber = true;
+        } else {
+          cleanInfixArrayList.add(token);
+        }
+      } else if(!"()*/+".contains(token)) {
+        if(negateNextNumber) {
+          if(token.charAt(0) == '-') {
+            cleanInfixArrayList.add(token.substring(1));
+          } else {
+            cleanInfixArrayList.add("-" + token);
+          }
+          negateNextNumber = false;
+        } else {
+          cleanInfixArrayList.add(token);
+        }
+      } else {
+        cleanInfixArrayList.add(token);
+      }
+    }
+    return cleanInfixArrayList;
   }
 
   /**
