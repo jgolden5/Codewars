@@ -905,6 +905,9 @@ public class TestMathEvaluator {
 
     String simple6 = "3 * -2";
     assertEquals(-6, math.calculate(simple6));
+
+    String codewars1 = "3 - -6";
+    assertEquals(9, math.calculate(codewars1));
   }
 
 }

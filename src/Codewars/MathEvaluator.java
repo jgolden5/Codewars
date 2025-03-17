@@ -62,7 +62,7 @@ public class MathEvaluator {
       if ("*/+-".contains(token)) {
           opCount++;
           if(opCount == numCount) {
-            if(token.equals("-")) {
+            if(token.equals("-") && !nextOpIsMinus(i, postfixOps)) {
               cleanResult = negateNumberAtIndex(indexOfLastNumber, cleanResult);
               opCount--;
             } else {
@@ -76,6 +76,18 @@ public class MathEvaluator {
         }
     }
     return cleanResult;
+  }
+
+  private boolean nextOpIsMinus(int startingIndex, ArrayList<String> postfixOps) {
+    String nextOp = "";
+    for(int i = startingIndex + 1; i < postfixOps.size(); i++) {
+      String token = postfixOps.get(i);
+      if("*/+-".contains(token)) {
+        nextOp = token;
+        break;
+      }
+    }
+    return nextOp.equals("-");
   }
 
   ArrayList<String> swapLastTwo(ArrayList<String> brokenPostfix) {
