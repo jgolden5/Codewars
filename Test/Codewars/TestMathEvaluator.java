@@ -623,8 +623,7 @@ public class TestMathEvaluator {
     parenInfix5.add(")");
     ArrayList<String> parenPostfix5 = new ArrayList<>();
     parenPostfix5.add("36");
-    parenPostfix5.add("3");
-    parenPostfix5.add("-");
+    parenPostfix5.add("-3");
     parenPostfix5.add("15");
     parenPostfix5.add("+");
     parenPostfix5.add("/");
@@ -929,6 +928,9 @@ public class TestMathEvaluator {
 
     String codewars2 = "36 /(-3 + 15)";
     assertEquals(3, math.calculate(codewars2));
+
+//    String codewars3 = "123/-(-5 + 2)";
+//    assertEquals(41, math.calculate(codewars3));
   }
 
 }

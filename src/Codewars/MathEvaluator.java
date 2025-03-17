@@ -146,15 +146,24 @@ public class MathEvaluator {
   ArrayList<String> infixToPostfixArrayList(ArrayList<String> infixArrayList) {
     ArrayList<String> postfixResult = new ArrayList<>();
     Stack<String> opStack = new Stack<>();
-    for (String token : infixArrayList) {
+    boolean shouldNegateNextNumber = false;
+    for (int i = 0; i < infixArrayList.size(); i++) {
+      String token = infixArrayList.get(i);
       if(!"()*/+-".contains(token)) {
-        postfixResult.add(token);
+        if(shouldNegateNextNumber) {
+          postfixResult.add("-" + token);
+          opStack.pop();
+          shouldNegateNextNumber = false;
+        } else {
+          postfixResult.add(token);
+        }
       } else if(token.equals(")")) {
         while(!opStack.peek().equals("(")) {
           postfixResult.add(opStack.pop());
         }
         opStack.pop();
       } else {
+        shouldNegateNextNumber = i > 0 && infixArrayList.get(i).equals("-") && infixArrayList.get(i - 1).equals("(");
         while(!opStack.isEmpty() && !opStack.peek().equals("(") &&
           ("*/".contains(token) && "*/".contains(opStack.peek()) || "+-".contains(token))) {
             postfixResult.add(opStack.pop());
