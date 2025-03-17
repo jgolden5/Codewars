@@ -183,8 +183,9 @@ public class MathEvaluator {
     boolean negateNextNumber = false;
     for(int i = 0; i < infixArrayList.size(); i++) {
       String token = infixArrayList.get(i);
-      boolean prevTokenWasMinus = i > 0 && infixArrayList.get(i - 1).equals("-");
-      boolean prevTokenWasNumber = i > 0 && !"*/+-".contains(infixArrayList.get(i - 1));
+      String prevToken = i > 0 ? infixArrayList.get(i - 1) : "";
+      boolean prevTokenWasMinus = i > 0 && prevToken.equals("-");
+      boolean prevTokenWasNumber = i > 0 && !"*/+-".contains(prevToken);
       if(token.equals("-")) {
         if(prevTokenWasMinus) {
           cleanInfixArrayList.remove(i - 1);

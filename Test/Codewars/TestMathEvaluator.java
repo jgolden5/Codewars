@@ -377,6 +377,17 @@ public class TestMathEvaluator {
     afterSimple4.add("+");
     afterSimple4.add("4");
     assertEquals(afterSimple4, math.fixInfixArrayListMinuses(beforeSimple4));
+
+    ArrayList<String> beforeMedium1 = new ArrayList<>();
+    beforeMedium1.add("2");
+    beforeMedium1.add("+");
+    beforeMedium1.add("-");
+    beforeMedium1.add("2");
+    ArrayList<String> afterMedium1 = new ArrayList<>();
+    afterMedium1.add("2");
+    afterMedium1.add("+");
+    afterMedium1.add("-2");
+    assertEquals(afterMedium1, math.fixInfixArrayListMinuses(beforeMedium1));
   }
 
   @Test
