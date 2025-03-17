@@ -611,6 +611,24 @@ public class TestMathEvaluator {
     parenPostfix4.add("+");
     parenPostfix4.add("-");
     assertEquals(parenPostfix4, math.infixToPostfixArrayList(parenInfix4));
+
+    ArrayList<String> parenInfix5 = new ArrayList<>();
+    parenInfix5.add("36");
+    parenInfix5.add("/");
+    parenInfix5.add("(");
+    parenInfix5.add("-");
+    parenInfix5.add("3");
+    parenInfix5.add("+");
+    parenInfix5.add("15");
+    parenInfix5.add(")");
+    ArrayList<String> parenPostfix5 = new ArrayList<>();
+    parenPostfix5.add("36");
+    parenPostfix5.add("3");
+    parenPostfix5.add("-");
+    parenPostfix5.add("15");
+    parenPostfix5.add("+");
+    parenPostfix5.add("/");
+    assertEquals(parenPostfix5, math.infixToPostfixArrayList(parenInfix5));
   }
 
   @Test
@@ -908,6 +926,9 @@ public class TestMathEvaluator {
 
     String codewars1 = "3 - -6";
     assertEquals(9, math.calculate(codewars1));
+
+    String codewars2 = "36 /(-3 + 15)";
+    assertEquals(3, math.calculate(codewars2));
   }
 
 }
