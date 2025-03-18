@@ -190,37 +190,45 @@ public class MathEvaluator {
    */
   ArrayList<String> fixInfixArrayListMinuses(ArrayList<String> infixArrayList) {
     ArrayList<String> cleanInfixArrayList = new ArrayList<>();
-    int minusCount = 0;
+    boolean shouldNegate = false;
+    int unresolvedParentheses = 0;
     for (int i = 0; i < infixArrayList.size(); i++) {
       String token = infixArrayList.get(i);
-      if (token.equals("-")) {
-        minusCount++;
-      } else if (minusCount == 0) {
-        cleanInfixArrayList.add(token);
+      String prevToken = i > 0 ? infixArrayList.get(i - 1) : " ";
+      String nextToken = i < infixArrayList.size() - 1 ? infixArrayList.get(i + 1) : " ";
+      if (token.equals("-") && (!isNumber(prevToken) || !isNumber(nextToken))) {
+        shouldNegate = !shouldNegate || unresolvedParentheses > 0;
       } else {
-        if (minusCount > 1) {
+        if (shouldNegate && isNumber(token)) {
+          token = negateToken(token);
+          shouldNegate = unresolvedParentheses > 0;
+        }
+        if (token.equals("(")) {
+          unresolvedParentheses++;
+        } else if (token.equals(")")) {
+          unresolvedParentheses--;
+        }
+        String prevClean = cleanInfixArrayList.size() > 0 ? cleanInfixArrayList.get(cleanInfixArrayList.size() - 1) : "";
+        if (isNumber(token) && cleanInfixArrayList.size() > 0 && isNumber(prevClean)) {
           cleanInfixArrayList.add("+");
         }
-        if (!token.equals("(")) {
-          if (minusCount % 2 == 1) {
-            boolean tokenBeforeMinusWasNumber = i > 1 && !"*/+-".contains(infixArrayList.get(i - 2));
-            if (minusCount == 1 && tokenBeforeMinusWasNumber) {
-              cleanInfixArrayList.add("-");
-              cleanInfixArrayList.add(token);
-            } else {
-              String tokenToAdd = token.charAt(0) == '-' ? token.substring(1) : "-" + token;
-              cleanInfixArrayList.add(tokenToAdd);
-            }
-          } else {
-            cleanInfixArrayList.add(token);
-          }
-          minusCount = 0;
-        } else {
-          cleanInfixArrayList.add(token);
-        }
+        cleanInfixArrayList.add(token);
       }
     }
     return cleanInfixArrayList;
+  }
+
+  private boolean isNumber(String token) {
+    char lastChar = token.charAt(token.length() - 1); //last so that minus sign is ignored
+    return "0123456789".contains(String.valueOf(lastChar));
+  }
+
+  private String negateToken(String token) {
+    if(token.charAt(0) == '-') {
+      return token.substring(1);
+    } else {
+      return "-" + token;
+    }
   }
 
   /**
