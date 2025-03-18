@@ -201,19 +201,23 @@ public class MathEvaluator {
         if (minusCount > 1) {
           cleanInfixArrayList.add("+");
         }
-        if (minusCount % 2 == 1) {
-          boolean previousTokenWasNumber = i > 1 && !"*/+-".contains(infixArrayList.get(i - 2));
-          if (minusCount == 1 && previousTokenWasNumber) {
-            cleanInfixArrayList.add("-");
-            cleanInfixArrayList.add(token);
+        if (!token.equals("(")) {
+          if (minusCount % 2 == 1) {
+            boolean tokenBeforeMinusWasNumber = i > 1 && !"*/+-".contains(infixArrayList.get(i - 2));
+            if (minusCount == 1 && tokenBeforeMinusWasNumber) {
+              cleanInfixArrayList.add("-");
+              cleanInfixArrayList.add(token);
+            } else {
+              String tokenToAdd = token.charAt(0) == '-' ? token.substring(1) : "-" + token;
+              cleanInfixArrayList.add(tokenToAdd);
+            }
           } else {
-            String tokenToAdd = token.charAt(0) == '-' ? token.substring(1) : "-" + token;
-            cleanInfixArrayList.add(tokenToAdd);
+            cleanInfixArrayList.add(token);
           }
+          minusCount = 0;
         } else {
           cleanInfixArrayList.add(token);
         }
-        minusCount = 0;
       }
     }
     return cleanInfixArrayList;
