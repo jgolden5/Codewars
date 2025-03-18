@@ -191,15 +191,15 @@ public class MathEvaluator {
   ArrayList<String> fixInfixArrayListMinuses(ArrayList<String> infixArrayList) {
     ArrayList<String> cleanInfixArrayList = new ArrayList<>();
     boolean shouldNegate = false;
-    int unresolvedParentheses = 0;
+    int unresolvedParenthesesNeedingNegation = 0;
     for (int i = 0; i < infixArrayList.size(); i++) {
       String token = infixArrayList.get(i);
       String prevToken = i > 0 ? infixArrayList.get(i - 1) : " ";
       String nextToken = i < infixArrayList.size() - 1 ? infixArrayList.get(i + 1) : " ";
       if (token.equals("-") && (!isNumber(prevToken) || !isNumber(nextToken))) {
-        shouldNegate = !shouldNegate || unresolvedParentheses > 0;
+        shouldNegate = !shouldNegate || unresolvedParenthesesNeedingNegation > 0;
         if(i > 0 && nextToken.equals("(")) {
-          if(unresolvedParentheses % 2 == 0) {
+          if(unresolvedParenthesesNeedingNegation % 2 == 0) {
             cleanInfixArrayList.add("+");
           } else {
             cleanInfixArrayList.add("-");
@@ -208,12 +208,12 @@ public class MathEvaluator {
       } else {
         if (shouldNegate && isNumber(token)) {
           token = negateToken(token);
-          shouldNegate = unresolvedParentheses > 0;
+          shouldNegate = unresolvedParenthesesNeedingNegation > 0;
         }
         if (token.equals("(")) {
-          unresolvedParentheses++;
+          unresolvedParenthesesNeedingNegation++;
         } else if (token.equals(")")) {
-          unresolvedParentheses--;
+          unresolvedParenthesesNeedingNegation--;
         }
         String prevClean = cleanInfixArrayList.size() > 0 ? cleanInfixArrayList.get(cleanInfixArrayList.size() - 1) : "";
         if (isNumber(token) && cleanInfixArrayList.size() > 0 && isNumber(prevClean)) {

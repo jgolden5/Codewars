@@ -484,6 +484,29 @@ public class TestMathEvaluator {
     afterParentheses3.add(")");
     afterParentheses3.add(")");
     assertEquals(afterParentheses3, math.fixInfixArrayListMinuses(beforeParentheses3));
+
+    ArrayList<String> beforeParentheses4 = new ArrayList<>();
+    beforeParentheses4.add("-");
+    beforeParentheses4.add("(");
+    beforeParentheses4.add("4");
+    beforeParentheses4.add("+");
+    beforeParentheses4.add("(");
+    beforeParentheses4.add("1");
+    beforeParentheses4.add("+");
+    beforeParentheses4.add("2");
+    beforeParentheses4.add(")");
+    beforeParentheses4.add(")");
+    ArrayList<String> afterParentheses4 = new ArrayList<>();
+    afterParentheses4.add("(");
+    afterParentheses4.add("-4");
+    afterParentheses4.add("+");
+    afterParentheses4.add("(");
+    afterParentheses4.add("-1");
+    afterParentheses4.add("+");
+    afterParentheses4.add("-2");
+    afterParentheses4.add(")");
+    afterParentheses4.add(")");
+    assertEquals(afterParentheses4, math.fixInfixArrayListMinuses(beforeParentheses4));
   }
 
   @Test
