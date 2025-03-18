@@ -507,6 +507,54 @@ public class TestMathEvaluator {
     afterParentheses4.add(")");
     afterParentheses4.add(")");
     assertEquals(afterParentheses4, math.fixInfixArrayListMinuses(beforeParentheses4));
+
+    ArrayList<String> beforeParentheses5 = new ArrayList<>();
+    beforeParentheses5.add("-");
+    beforeParentheses5.add("(");
+    beforeParentheses5.add("-");
+    beforeParentheses5.add("(");
+    beforeParentheses5.add("(");
+    beforeParentheses5.add("5");
+    beforeParentheses5.add(")");
+    beforeParentheses5.add(")");
+    beforeParentheses5.add(")");
+    beforeParentheses5.add(")");
+    ArrayList<String> afterParentheses5 = new ArrayList<>();
+    afterParentheses5.add("(");
+    afterParentheses5.add("(");
+    afterParentheses5.add("(");
+    afterParentheses5.add("(");
+    afterParentheses5.add("5");
+    afterParentheses5.add(")");
+    afterParentheses5.add(")");
+    afterParentheses5.add(")");
+    afterParentheses5.add(")");
+    assertEquals(afterParentheses5, math.fixInfixArrayListMinuses(beforeParentheses5));
+
+    ArrayList<String> beforeParentheses6 = new ArrayList<>();
+    beforeParentheses6.add("-");
+    beforeParentheses6.add("(");
+    beforeParentheses6.add("-");
+    beforeParentheses6.add("(");
+    beforeParentheses6.add("-");
+    beforeParentheses6.add("(");
+    beforeParentheses6.add("(");
+    beforeParentheses6.add("6");
+    beforeParentheses6.add(")");
+    beforeParentheses6.add(")");
+    beforeParentheses6.add(")");
+    beforeParentheses6.add(")");
+    ArrayList<String> afterParentheses6 = new ArrayList<>();
+    afterParentheses6.add("(");
+    afterParentheses6.add("(");
+    afterParentheses6.add("(");
+    afterParentheses6.add("(");
+    afterParentheses6.add("-6");
+    afterParentheses6.add(")");
+    afterParentheses6.add(")");
+    afterParentheses6.add(")");
+    afterParentheses6.add(")");
+    assertEquals(afterParentheses6, math.fixInfixArrayListMinuses(beforeParentheses6));
   }
 
   @Test
