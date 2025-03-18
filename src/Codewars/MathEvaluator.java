@@ -197,19 +197,23 @@ public class MathEvaluator {
         minusCount++;
       } else if (minusCount == 0) {
         cleanInfixArrayList.add(token);
-      } else if (minusCount % 2 == 1) {
-        boolean previousTokenWasNumber = i > 1 && !"*/+-".contains(infixArrayList.get(i - 2));
-        if (minusCount == 1 && previousTokenWasNumber) {
-          cleanInfixArrayList.add("-");
-          cleanInfixArrayList.add(token);
-        } else {
-          if(minusCount > 1) {
-            cleanInfixArrayList.add("+");
-          }
-          String tokenToAdd = token.charAt(0) == '-' ? token.substring(1) : "-" + token;
-          cleanInfixArrayList.add(tokenToAdd);
-          minusCount = 0;
+      } else {
+        if (minusCount > 1) {
+          cleanInfixArrayList.add("+");
         }
+        if (minusCount % 2 == 1) {
+          boolean previousTokenWasNumber = i > 1 && !"*/+-".contains(infixArrayList.get(i - 2));
+          if (minusCount == 1 && previousTokenWasNumber) {
+            cleanInfixArrayList.add("-");
+            cleanInfixArrayList.add(token);
+          } else {
+            String tokenToAdd = token.charAt(0) == '-' ? token.substring(1) : "-" + token;
+            cleanInfixArrayList.add(tokenToAdd);
+          }
+        } else {
+          cleanInfixArrayList.add(token);
+        }
+        minusCount = 0;
       }
     }
     return cleanInfixArrayList;
