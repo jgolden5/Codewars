@@ -388,6 +388,18 @@ public class TestMathEvaluator {
     afterMedium1.add("+");
     afterMedium1.add("-2");
     assertEquals(afterMedium1, math.fixInfixArrayListMinuses(beforeMedium1));
+
+    ArrayList<String> beforeMedium2 = new ArrayList<>();
+    beforeMedium2.add("3");
+    beforeMedium2.add("-");
+    beforeMedium2.add("-");
+    beforeMedium2.add("-");
+    beforeMedium2.add("3");
+    ArrayList<String> afterMedium2 = new ArrayList<>();
+    afterMedium2.add("3");
+    afterMedium2.add("+");
+    afterMedium2.add("-3");
+    assertEquals(afterMedium2, math.fixInfixArrayListMinuses(beforeMedium2));
   }
 
   @Test

@@ -178,36 +178,38 @@ public class MathEvaluator {
     return postfixResult;
   }
 
+  /**
+   * for each token in infixArrayList
+     * if token equals "-", increment minusCount
+     * else if minusCount == 0, add token to cleanInfixArrayList
+     * else if minusCount == 1 and token is a number, add "-" + token to cleanInfixArrayList, then reset minusCount to 0
+     * else if minusCount % 2 == 0, add "+" to cleanInfixArrayList, and reset minusCount to 0
+     * else add "+" to cleanInfixArrayList, add "-" + token to cleanInfixArrayList, then reset minusCount to 0
+   * @param infixArrayList
+   * @return
+   */
   ArrayList<String> fixInfixArrayListMinuses(ArrayList<String> infixArrayList) {
     ArrayList<String> cleanInfixArrayList = new ArrayList<>();
-    boolean negateNextNumber = false;
-    for(int i = 0; i < infixArrayList.size(); i++) {
+    int minusCount = 0;
+    for (int i = 0; i < infixArrayList.size(); i++) {
       String token = infixArrayList.get(i);
-      String prevToken = i > 0 ? infixArrayList.get(i - 1) : "";
-      boolean prevTokenWasMinus = i > 0 && prevToken.equals("-");
-      boolean prevTokenWasNumber = i > 0 && !"*/+-".contains(prevToken);
-      if(token.equals("-")) {
-        if(prevTokenWasMinus) {
-          cleanInfixArrayList.remove(i - 1);
-          cleanInfixArrayList.add("+");
-        } else if(!prevTokenWasNumber) {
-          negateNextNumber = true;
-        } else {
-          cleanInfixArrayList.add(token);
-        }
-      } else if(!"()*/+".contains(token)) {
-        if(negateNextNumber) {
-          if(token.charAt(0) == '-') {
-            cleanInfixArrayList.add(token.substring(1));
-          } else {
-            cleanInfixArrayList.add("-" + token);
-          }
-          negateNextNumber = false;
-        } else {
-          cleanInfixArrayList.add(token);
-        }
-      } else {
+      if (token.equals("-")) {
+        minusCount++;
+      } else if (minusCount == 0) {
         cleanInfixArrayList.add(token);
+      } else if (minusCount % 2 == 1) {
+        boolean previousTokenWasNumber = i > 1 && !"*/+-".contains(infixArrayList.get(i - 2));
+        if (minusCount == 1 && previousTokenWasNumber) {
+          cleanInfixArrayList.add("-");
+          cleanInfixArrayList.add(token);
+        } else {
+          if(minusCount > 1) {
+            cleanInfixArrayList.add("+");
+          }
+          String tokenToAdd = token.charAt(0) == '-' ? token.substring(1) : "-" + token;
+          cleanInfixArrayList.add(tokenToAdd);
+          minusCount = 0;
+        }
       }
     }
     return cleanInfixArrayList;
