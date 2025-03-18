@@ -198,6 +198,13 @@ public class MathEvaluator {
       String nextToken = i < infixArrayList.size() - 1 ? infixArrayList.get(i + 1) : " ";
       if (token.equals("-") && (!isNumber(prevToken) || !isNumber(nextToken))) {
         shouldNegate = !shouldNegate || unresolvedParentheses > 0;
+        if(i > 0 && nextToken.equals("(")) {
+          if(unresolvedParentheses % 2 == 0) {
+            cleanInfixArrayList.add("+");
+          } else {
+            cleanInfixArrayList.add("-");
+          }
+        }
       } else {
         if (shouldNegate && isNumber(token)) {
           token = negateToken(token);
