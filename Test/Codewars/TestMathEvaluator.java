@@ -400,6 +400,41 @@ public class TestMathEvaluator {
     afterMedium2.add("+");
     afterMedium2.add("-3");
     assertEquals(afterMedium2, math.fixInfixArrayListMinuses(beforeMedium2));
+
+    ArrayList<String> beforeMedium3 = new ArrayList<>();
+    beforeMedium3.add("3");
+    beforeMedium3.add("+");
+    beforeMedium3.add("4");
+    beforeMedium3.add("-");
+    beforeMedium3.add("-5");
+    ArrayList<String> afterMedium3 = new ArrayList<>();
+    afterMedium3.add("3");
+    afterMedium3.add("+");
+    afterMedium3.add("4");
+    afterMedium3.add("-");
+    afterMedium3.add("-5");
+    assertEquals(afterMedium3, math.fixInfixArrayListMinuses(beforeMedium3));
+
+    ArrayList<String> beforeMedium4 = new ArrayList<>();
+    beforeMedium4.add("9");
+    beforeMedium4.add("-");
+    beforeMedium4.add("-");
+    beforeMedium4.add("8");
+    beforeMedium4.add("/");
+    beforeMedium4.add("-");
+    beforeMedium4.add("4");
+    beforeMedium4.add("*");
+    beforeMedium4.add("-");
+    beforeMedium4.add("3");
+    ArrayList<String> afterMedium4 = new ArrayList<>();
+    afterMedium4.add("9");
+    afterMedium4.add("+");
+    afterMedium4.add("8");
+    afterMedium4.add("/");
+    afterMedium4.add("-4");
+    afterMedium4.add("*");
+    afterMedium4.add("-3");
+    assertEquals(afterMedium4, math.fixInfixArrayListMinuses(beforeMedium4));
   }
 
   @Test
