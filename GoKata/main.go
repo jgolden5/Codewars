@@ -5,6 +5,8 @@ import (
 )
 
 func main() {
-  test := "hello world"
-  fmt.Println(ReverseWords(test))
+  var name string = "Jonathan"
+  var twoLetters string = "no"
+  fmt.Println(RemoveChar(name))
+  fmt.Println(RemoveChar(twoLetters))
 }
